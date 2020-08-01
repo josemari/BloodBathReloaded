@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 
-import org.jomaveger.tiger.util.lang.DeepCloneable;
+import org.jomaveger.tge.util.lang.DeepCloneable;
 import org.jomaveger.tiger.util.lang.ordering.NaturalOrder;
 
 import com.google.java.contract.Ensures;

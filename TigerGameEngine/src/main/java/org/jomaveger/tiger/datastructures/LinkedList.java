@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-import org.jomaveger.tiger.util.lang.DeepCloneable;
+import org.jomaveger.tge.util.lang.DeepCloneable;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Invariant;

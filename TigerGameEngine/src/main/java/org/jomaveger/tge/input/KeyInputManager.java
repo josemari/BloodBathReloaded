@@ -1,9 +1,10 @@
-package org.jomaveger.tiger.input;
+package org.jomaveger.tge.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import org.jomaveger.tiger.graphics.Window;
-import org.jomaveger.tiger.util.lang.IDisposable;
+
+import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

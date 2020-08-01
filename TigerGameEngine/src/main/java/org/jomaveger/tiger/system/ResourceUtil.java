@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import org.jomaveger.tiger.util.exception.ExceptionUtils;
+import org.jomaveger.tge.util.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

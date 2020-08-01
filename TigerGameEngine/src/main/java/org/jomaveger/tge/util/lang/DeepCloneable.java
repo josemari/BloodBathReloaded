@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.util.lang;
+package org.jomaveger.tge.util.lang;
 
 import java.io.*;
 

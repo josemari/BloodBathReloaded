@@ -1,11 +1,11 @@
-package org.jomaveger.tiger.graphics;
+package org.jomaveger.tge.graphics;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.Serializable;
 
-import org.jomaveger.tiger.util.lang.IDisposable;
+import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.graphics;
+package org.jomaveger.tge.graphics;
 
 import java.awt.Color;
 import java.awt.DisplayMode;
@@ -9,11 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
 
-import org.jomaveger.tiger.input.KeyInputManager;
-import org.jomaveger.tiger.input.MouseInputManager;
-import org.jomaveger.tiger.util.exception.ExceptionUtils;
-import org.jomaveger.tiger.util.lang.IDisposable;
-
+import org.jomaveger.tge.input.KeyInputManager;
+import org.jomaveger.tge.input.MouseInputManager;
+import org.jomaveger.tge.util.exception.ExceptionUtils;
+import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

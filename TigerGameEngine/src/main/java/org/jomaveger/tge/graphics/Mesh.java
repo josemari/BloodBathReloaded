@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.graphics;
+package org.jomaveger.tge.graphics;
 
 public class Mesh  {
 

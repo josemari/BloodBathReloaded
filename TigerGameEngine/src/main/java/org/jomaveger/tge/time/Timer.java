@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.time;
+package org.jomaveger.tge.time;
 
 public final class Timer {
 

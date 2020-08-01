@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.util.exception;
+package org.jomaveger.tge.util.exception;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

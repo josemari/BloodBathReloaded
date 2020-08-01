@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.jomaveger.tiger.util.lang.DeepCloneable;
+import org.jomaveger.tge.util.lang.DeepCloneable;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Invariant;

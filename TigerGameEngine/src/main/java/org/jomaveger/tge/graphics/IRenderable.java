@@ -1,6 +1,6 @@
-package org.jomaveger.tiger.graphics;
+package org.jomaveger.tge.graphics;
 
-import org.jomaveger.tiger.util.lang.IDisposable;
+import org.jomaveger.tge.util.lang.IDisposable;
 
 public interface IRenderable extends IDisposable {
 

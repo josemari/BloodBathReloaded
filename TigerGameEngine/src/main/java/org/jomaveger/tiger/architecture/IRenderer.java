@@ -1,8 +1,8 @@
 package org.jomaveger.tiger.architecture;
 
-import org.jomaveger.tiger.input.KeyInputManager;
-import org.jomaveger.tiger.input.MouseInputManager;
-import org.jomaveger.tiger.util.lang.IDisposable;
+import org.jomaveger.tge.input.KeyInputManager;
+import org.jomaveger.tge.input.MouseInputManager;
+import org.jomaveger.tge.util.lang.IDisposable;
 
 public interface IRenderer extends IDisposable {
 

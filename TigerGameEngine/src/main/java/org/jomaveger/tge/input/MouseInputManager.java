@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.input;
+package org.jomaveger.tge.input;
 
 import java.awt.Point;
 import java.awt.Robot;
@@ -10,9 +10,9 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.SwingUtilities;
 
-import org.jomaveger.tiger.graphics.Window;
-import org.jomaveger.tiger.util.exception.ExceptionUtils;
-import org.jomaveger.tiger.util.lang.IDisposable;
+import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.util.exception.ExceptionUtils;
+import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,9 +1,9 @@
 package org.jomaveger.tiger.architecture;
 
-import org.jomaveger.tiger.graphics.Framebuffer;
-import org.jomaveger.tiger.input.KeyInputManager;
-import org.jomaveger.tiger.input.MouseInputManager;
-import org.jomaveger.tiger.util.exception.ExceptionUtils;
+import org.jomaveger.tge.graphics.Framebuffer;
+import org.jomaveger.tge.input.KeyInputManager;
+import org.jomaveger.tge.input.MouseInputManager;
+import org.jomaveger.tge.util.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.architecture;
+package org.jomaveger.tge.architecture;
 
 import org.jomaveger.tge.graphics.Window;
 import org.jomaveger.tge.input.KeyInputManager;
@@ -8,58 +8,46 @@ import org.jomaveger.tge.util.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class Engine implements IEngine {
+public final class GameEngine implements IGameEngine {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Engine.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GameEngine.class);
 
     public static final int TARGET_FPS = 75;
     public static final int TARGET_UPS = 30;
 
-    private final IRenderer renderer;
-    private final SceneManager sceneManager;
     private final Window window;
     private final Timer timer;
     private final KeyInputManager keyInputManager;
     private final MouseInputManager mouseInputManager;
+    private final IGameLogic gameLogic;
 
     private String windowTitle;
-
-    private final IScene scene;
 
     private double lastFps;
 
     private int fps;
 
-    public Engine(String windowTitle, int width, int height, IScene scene) {
+    public GameEngine(String windowTitle, int width, int height, IGameLogic gameLogic) {
         this.windowTitle = windowTitle;
-        this.sceneManager = new SceneManager(this);
         this.window = new Window(windowTitle, width, height);
-        this.renderer = new Renderer(this);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
-        this.scene = scene;
+        this.gameLogic = gameLogic;
     }
     
-    public Engine(String windowTitle, IScene scene) {
+    public GameEngine(String windowTitle, IGameLogic gameLogic) {
         this.windowTitle = null;
-        this.sceneManager = new SceneManager(this);
         this.window = new Window(windowTitle);
-        this.renderer = new Renderer(this);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
-        this.scene = scene;
+        this.gameLogic = gameLogic;
     }
 
     @Override
-    public SceneManager getSceneManager() {
-        return this.sceneManager;
-    }
-
-    @Override
-    public IRenderer getRenderer() {
-        return this.renderer;
+    public IGameLogic getGameLogic() {
+        return this.gameLogic;
     }
 
     @Override
@@ -78,11 +66,6 @@ public final class Engine implements IEngine {
     }
 
     @Override
-    public boolean hasRenderer() {
-        return this.renderer != null;
-    }
-
-    @Override
     public void setWindowTitle(String title) {
         this.windowTitle = title;
 
@@ -90,23 +73,7 @@ public final class Engine implements IEngine {
             this.window.setWindowTitle(this.windowTitle);
         }
     }
-
-    @Override
-    public void init() {
-        LOG.info("Initializing Tiger Engine ...");
-
-        this.window.init();
-        this.timer.init();
-        this.keyInputManager.init();
-        this.mouseInputManager.init();
-        this.sceneManager.loadScene(scene, window.getFramebuffer());
-        this.renderer.init();
-        this.lastFps = timer.getTime();
-        this.fps = 0;
-
-        LOG.info("Tiger engine initialized successfully!");
-    }
-
+    
     @Override
     public void run() {
         try {
@@ -118,6 +85,20 @@ public final class Engine implements IEngine {
         }
     }
 
+    private void init() {
+        LOG.info("Initializing Tiger Engine ...");
+
+        this.window.init();
+        this.timer.init();
+        this.keyInputManager.init();
+        this.mouseInputManager.init();
+        this.gameLogic.init(this.window);
+        this.lastFps = timer.getTime();
+        this.fps = 0;
+
+        LOG.info("Tiger engine initialized successfully!");
+    }
+
     @Override
     public void gameLoop() {
         float elapsedTime;
@@ -125,9 +106,9 @@ public final class Engine implements IEngine {
         float interval = 1f / TARGET_UPS;
 
         boolean running = true;
-        while (running && !window.windowShouldClose()) {
+        while (running && !this.window.windowShouldClose()) {
 
-            elapsedTime = timer.getElapsedTime();
+            elapsedTime = this.timer.getElapsedTime();
             accumulator += elapsedTime;
 
             this.input();
@@ -146,7 +127,7 @@ public final class Engine implements IEngine {
     private void input() {
     	this.keyInputManager.poll();
         this.mouseInputManager.poll();
-        this.renderer.input(keyInputManager, mouseInputManager);
+        this.gameLogic.input(this.window, this.keyInputManager, this.mouseInputManager);
     }
 
     private void render() {
@@ -158,7 +139,7 @@ public final class Engine implements IEngine {
         fps++;
 
         this.window.clear();
-        this.renderer.render();
+        this.gameLogic.render(this.window);
         this.window.render();
     }
 
@@ -173,14 +154,13 @@ public final class Engine implements IEngine {
         }
     }
 
-    @Override
-    public void update(float interval) {
-        this.renderer.update(interval);
+    private void update(float interval) {
+        this.gameLogic.update(interval, this.keyInputManager, this.mouseInputManager, this.window);
     }
 
     @Override
     public void dispose() {
-        this.renderer.dispose();
+        this.gameLogic.dispose();
         this.window.dispose();
         this.keyInputManager.dispose();
         this.mouseInputManager.dispose();
