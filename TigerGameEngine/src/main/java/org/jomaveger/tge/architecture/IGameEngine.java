@@ -18,4 +18,6 @@ public interface IGameEngine extends Runnable, IDisposable {
 	void setWindowTitle(String title);
 	
 	void gameLoop();
+	
+	void start();
 }

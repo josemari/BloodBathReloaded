@@ -32,8 +32,6 @@ public class Window implements IDisposable {
 
     private JFrame frame;
     
-    private Framebuffer framebuffer;
-    
     private KeyInputManager keyInputManager;
 
 	private MouseInputManager mouseInputManager;
@@ -93,13 +91,11 @@ public class Window implements IDisposable {
                 LOG.error(ExceptionUtils.getExpandedMessage(ex));
             }
         }
-        this.framebuffer = new Framebuffer(displayMode.getWidth(), displayMode.getHeight());
     }
 
     private void setWindowedScreen() {
         frame = new JFrame();
         frame.setSize(this.width, this.height);
-        this.framebuffer = new Framebuffer(this.width, this.height);
         frame.setResizable(true);
         frame.setTitle(this.getWindowTitle());
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -127,7 +123,7 @@ public class Window implements IDisposable {
         }
     }
 
-    private Graphics2D getGraphics() {
+    public Graphics2D getGraphics() {
     	BufferStrategy bufferStrategy = getBufferStrategy();
         return (Graphics2D) bufferStrategy.getDrawGraphics();
     }
@@ -141,17 +137,11 @@ public class Window implements IDisposable {
 		return bufferStrategy;
 	}
 
-    public void render() {
-    	this.framebuffer.swapBuffers();
-    	getGraphics().drawImage(this.framebuffer.getFrameBuffer(), 0, 0, getWidth(), getHeight(), frame);
+    public void update() {
         if (!getBufferStrategy().contentsLost()) {
         	getBufferStrategy().show();
         }
     }
-
-    public Framebuffer getFramebuffer() {
-		return this.framebuffer;
-	}
 
 	public String getWindowTitle() {
         return title;
@@ -174,7 +164,6 @@ public class Window implements IDisposable {
             window.dispose();
         }
         frame = null;
-        framebuffer.dispose();
     }
 
 	public boolean windowShouldClose() {
@@ -182,7 +171,9 @@ public class Window implements IDisposable {
 	}
 
 	public void clear() {
-		getGraphics().clearRect(0, 0, getWidth(), getHeight());
+		Graphics2D g = getGraphics();
+		g.clearRect(0, 0, getWidth(), getHeight());
+		g.dispose();
 	}
 
 	public void addMouseManager(MouseInputManager mouseInputManager) {

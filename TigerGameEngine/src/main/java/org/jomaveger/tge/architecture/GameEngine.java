@@ -20,6 +20,7 @@ public final class GameEngine implements IGameEngine {
     private final KeyInputManager keyInputManager;
     private final MouseInputManager mouseInputManager;
     private final IGameLogic gameLogic;
+    private final Thread gameLoopThread;
 
     private String windowTitle;
 
@@ -34,6 +35,7 @@ public final class GameEngine implements IGameEngine {
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
         this.gameLogic = gameLogic;
+        this.gameLoopThread = new Thread(this);
     }
     
     public GameEngine(String windowTitle, IGameLogic gameLogic) {
@@ -43,6 +45,7 @@ public final class GameEngine implements IGameEngine {
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
         this.gameLogic = gameLogic;
+        this.gameLoopThread = new Thread(this);
     }
 
     @Override
@@ -72,6 +75,11 @@ public final class GameEngine implements IGameEngine {
         if (this.window != null) {
             this.window.setWindowTitle(this.windowTitle);
         }
+    }
+    
+    @Override
+    public void start() {
+        this.gameLoopThread.start();
     }
     
     @Override
@@ -140,7 +148,7 @@ public final class GameEngine implements IGameEngine {
 
         this.window.clear();
         this.gameLogic.render(this.window);
-        this.window.render();
+        this.window.update();
     }
 
     private void sync() {

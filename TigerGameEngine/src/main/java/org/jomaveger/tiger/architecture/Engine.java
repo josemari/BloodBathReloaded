@@ -99,7 +99,7 @@ public final class Engine implements IEngine {
         this.timer.init();
         this.keyInputManager.init();
         this.mouseInputManager.init();
-        this.sceneManager.loadScene(scene, window.getFramebuffer());
+//        this.sceneManager.loadScene(scene, window.getFramebuffer());
         this.renderer.init();
         this.lastFps = timer.getTime();
         this.fps = 0;
@@ -159,7 +159,7 @@ public final class Engine implements IEngine {
 
         this.window.clear();
         this.renderer.render();
-        this.window.render();
+        this.window.update();
     }
 
     private void sync() {

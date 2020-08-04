@@ -1,14 +1,16 @@
 package org.jomaveger.tiger.main;
 
-import org.jomaveger.tiger.architecture.Engine;
-import org.jomaveger.tiger.main.example2.ExampleScene;
+import org.jomaveger.tge.architecture.GameEngine;
+import org.jomaveger.tge.architecture.IGameEngine;
+import org.jomaveger.tiger.main.example1.DummyGameLogic;
 
 public class Main {
     
     public static void main(String[] args) {
 //        Engine tiger = new Engine("Tiger", new ExampleScene());
     	
-    	Engine tiger = new Engine("Tiger", 640, 480, new ExampleScene());
-        new Thread(tiger).start();        
+//    	IGameEngine tiger = new GameEngine("Tiger Game Engine", 640, 480, new DummyGameLogic());
+    	IGameEngine tiger = new GameEngine("Tiger Game Engine", new DummyGameLogic());
+        tiger.start();        
     }
 }
