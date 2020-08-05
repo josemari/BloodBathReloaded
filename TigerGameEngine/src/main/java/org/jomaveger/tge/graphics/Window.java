@@ -35,6 +35,8 @@ public class Window implements IDisposable {
     private KeyInputManager keyInputManager;
 
 	private MouseInputManager mouseInputManager;
+	
+	private Graphics2D graphics;
 
     public Window(String windowTitle, int width, int height) {
         this.title = windowTitle;
@@ -125,13 +127,17 @@ public class Window implements IDisposable {
 
     public Graphics2D getGraphics() {
     	BufferStrategy bufferStrategy = getBufferStrategy();
-        return (Graphics2D) bufferStrategy.getDrawGraphics();
+    	if (graphics != null) {
+    		graphics.dispose();
+    	}
+        graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
+        return graphics;
     }
 
 	private BufferStrategy getBufferStrategy() {
 		BufferStrategy bufferStrategy = frame.getBufferStrategy();
         if (bufferStrategy == null) {
-            frame.createBufferStrategy(3);
+            frame.createBufferStrategy(2);
             bufferStrategy = frame.getBufferStrategy();
         }
 		return bufferStrategy;
@@ -158,6 +164,9 @@ public class Window implements IDisposable {
 
     @Override
     public void dispose() {
+    	if (graphics != null) {
+    		graphics.dispose();
+    	}
         java.awt.Window window = screen.getFullScreenWindow();
         if (window != null) {
             screen.setFullScreenWindow(null);
