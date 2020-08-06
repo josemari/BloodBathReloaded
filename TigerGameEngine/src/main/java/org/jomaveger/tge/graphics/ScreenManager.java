@@ -16,9 +16,9 @@ import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Window implements IDisposable {
+public class ScreenManager implements IDisposable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Window.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ScreenManager.class);
 
     private final String title;
 
@@ -38,14 +38,14 @@ public class Window implements IDisposable {
 	
 	private Graphics2D graphics;
 
-    public Window(String windowTitle, int width, int height) {
+    public ScreenManager(String windowTitle, int width, int height) {
         this.title = windowTitle;
         this.width = width;
         this.height = height;
         this.fullscreen = false;
     }
 
-    public Window(String windowTitle) {
+    public ScreenManager(String windowTitle) {
         this.fullscreen = true;
         this.title = windowTitle;
         this.width = 0;
@@ -129,6 +129,7 @@ public class Window implements IDisposable {
     	BufferStrategy bufferStrategy = getBufferStrategy();
     	if (graphics != null) {
     		graphics.dispose();
+    		graphics = null;
     	}
         graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
         return graphics;
@@ -166,6 +167,7 @@ public class Window implements IDisposable {
     public void dispose() {
     	if (graphics != null) {
     		graphics.dispose();
+    		graphics = null;
     	}
         java.awt.Window window = screen.getFullScreenWindow();
         if (window != null) {
@@ -180,9 +182,8 @@ public class Window implements IDisposable {
 	}
 
 	public void clear() {
-		Graphics2D g = getGraphics();
-		g.clearRect(0, 0, getWidth(), getHeight());
-		g.dispose();
+		graphics = getGraphics();
+		graphics.clearRect(0, 0, getWidth(), getHeight());
 	}
 
 	public void addMouseManager(MouseInputManager mouseInputManager) {

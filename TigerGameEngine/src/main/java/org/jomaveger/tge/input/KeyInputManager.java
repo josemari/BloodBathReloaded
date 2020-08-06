@@ -3,7 +3,7 @@ package org.jomaveger.tge.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,15 +14,15 @@ public final class KeyInputManager implements IDisposable, KeyListener {
 
 	private static final int KEY_COUNT = 256;
 	
-    private Window window;
+    private ScreenManager window;
     private boolean[] keys;
     private int[] polled;
 
-    public KeyInputManager(Window window) {
+    public KeyInputManager(ScreenManager window) {
         this(window, false);
     }
 
-    public KeyInputManager(Window window, boolean init) {
+    public KeyInputManager(ScreenManager window, boolean init) {
         this.window = window;
         this.keys = new boolean[KEY_COUNT];
         this.polled = new int[KEY_COUNT];
@@ -36,7 +36,7 @@ public final class KeyInputManager implements IDisposable, KeyListener {
         this.window.addKeyboardManager(this);
     }
 
-    public Window getWindow() {
+    public ScreenManager getWindow() {
         return this.window;
     }
 

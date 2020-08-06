@@ -1,6 +1,6 @@
 package org.jomaveger.tiger.architecture;
 
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.input.KeyInputManager;
 import org.jomaveger.tge.input.MouseInputManager;
 import org.jomaveger.tge.util.lang.IDisposable;
@@ -11,7 +11,7 @@ public interface IEngine extends Runnable, IDisposable {
 	
 	IRenderer getRenderer();
 	
-	Window getWindow();
+	ScreenManager getWindow();
 	
 	KeyInputManager getKeyInputManager();
 	

@@ -10,7 +10,7 @@ import java.awt.event.MouseWheelListener;
 
 import javax.swing.SwingUtilities;
 
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.util.exception.ExceptionUtils;
 import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
@@ -31,14 +31,14 @@ public final class MouseInputManager implements IDisposable, MouseListener, Mous
 
 	private int dx, dy;
 	private Robot robot;
-	private Window window;
+	private ScreenManager window;
 	private boolean relative;
 	
-	public MouseInputManager(Window window) {
+	public MouseInputManager(ScreenManager window) {
 		this(window, false);
 	}
 	
-	public MouseInputManager(Window window, boolean init) {
+	public MouseInputManager(ScreenManager window, boolean init) {
 		this.window = window;
 		
 		try {
@@ -60,7 +60,7 @@ public final class MouseInputManager implements IDisposable, MouseListener, Mous
 		this.window.addMouseManager(this);
 	}
 	
-	public Window getWindow() {
+	public ScreenManager getWindow() {
 		return this.window;
 	}
 	

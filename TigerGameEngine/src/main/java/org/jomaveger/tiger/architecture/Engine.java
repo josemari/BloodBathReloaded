@@ -1,6 +1,6 @@
 package org.jomaveger.tiger.architecture;
 
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.input.KeyInputManager;
 import org.jomaveger.tge.input.MouseInputManager;
 import org.jomaveger.tge.time.Timer;
@@ -17,7 +17,7 @@ public final class Engine implements IEngine {
 
     private final IRenderer renderer;
     private final SceneManager sceneManager;
-    private final Window window;
+    private final ScreenManager window;
     private final Timer timer;
     private final KeyInputManager keyInputManager;
     private final MouseInputManager mouseInputManager;
@@ -33,7 +33,7 @@ public final class Engine implements IEngine {
     public Engine(String windowTitle, int width, int height, IScene scene) {
         this.windowTitle = windowTitle;
         this.sceneManager = new SceneManager(this);
-        this.window = new Window(windowTitle, width, height);
+        this.window = new ScreenManager(windowTitle, width, height);
         this.renderer = new Renderer(this);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
@@ -44,7 +44,7 @@ public final class Engine implements IEngine {
     public Engine(String windowTitle, IScene scene) {
         this.windowTitle = null;
         this.sceneManager = new SceneManager(this);
-        this.window = new Window(windowTitle);
+        this.window = new ScreenManager(windowTitle);
         this.renderer = new Renderer(this);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
@@ -63,7 +63,7 @@ public final class Engine implements IEngine {
     }
 
     @Override
-    public Window getWindow() {
+    public ScreenManager getWindow() {
         return this.window;
     }
 

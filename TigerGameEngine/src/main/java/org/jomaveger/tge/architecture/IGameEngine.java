@@ -1,13 +1,13 @@
 package org.jomaveger.tge.architecture;
 
 import org.jomaveger.tge.util.lang.IDisposable;
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.input.KeyInputManager;
 import org.jomaveger.tge.input.MouseInputManager;
 
 public interface IGameEngine extends Runnable, IDisposable {
 	
-	Window getWindow();
+	ScreenManager getWindow();
 	
 	KeyInputManager getKeyInputManager();
 	

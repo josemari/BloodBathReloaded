@@ -1,6 +1,6 @@
 package org.jomaveger.tge.architecture;
 
-import org.jomaveger.tge.graphics.Window;
+import org.jomaveger.tge.graphics.ScreenManager;
 import org.jomaveger.tge.input.KeyInputManager;
 import org.jomaveger.tge.input.MouseInputManager;
 import org.jomaveger.tge.time.Timer;
@@ -15,7 +15,7 @@ public final class GameEngine implements IGameEngine {
     public static final int TARGET_FPS = 75;
     public static final int TARGET_UPS = 30;
 
-    private final Window window;
+    private final ScreenManager window;
     private final Timer timer;
     private final KeyInputManager keyInputManager;
     private final MouseInputManager mouseInputManager;
@@ -30,7 +30,7 @@ public final class GameEngine implements IGameEngine {
 
     public GameEngine(String windowTitle, int width, int height, IGameLogic gameLogic) {
         this.windowTitle = windowTitle;
-        this.window = new Window(windowTitle, width, height);
+        this.window = new ScreenManager(windowTitle, width, height);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
@@ -40,7 +40,7 @@ public final class GameEngine implements IGameEngine {
     
     public GameEngine(String windowTitle, IGameLogic gameLogic) {
         this.windowTitle = null;
-        this.window = new Window(windowTitle);
+        this.window = new ScreenManager(windowTitle);
         this.timer = new Timer();
         this.keyInputManager = new KeyInputManager(this.window);
         this.mouseInputManager = new MouseInputManager(this.window);
@@ -54,7 +54,7 @@ public final class GameEngine implements IGameEngine {
     }
 
     @Override
-    public Window getWindow() {
+    public ScreenManager getWindow() {
         return this.window;
     }
 
