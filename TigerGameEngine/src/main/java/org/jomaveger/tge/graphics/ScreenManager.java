@@ -158,7 +158,7 @@ public class ScreenManager implements IDisposable {
         frame.setTitle(title);
     }
 
-    public void addKeyboardManager(KeyInputManager keyInputManager) {
+    public void addKeyInputManager(KeyInputManager keyInputManager) {
     	this.keyInputManager = keyInputManager;
         frame.addKeyListener(keyInputManager);
     }
@@ -186,7 +186,7 @@ public class ScreenManager implements IDisposable {
 		graphics.clearRect(0, 0, getWidth(), getHeight());
 	}
 
-	public void addMouseManager(MouseInputManager mouseInputManager) {
+	public void addMouseInputManager(MouseInputManager mouseInputManager) {
 		this.mouseInputManager = mouseInputManager;
 		frame.addMouseListener(mouseInputManager);
 		frame.addMouseMotionListener(mouseInputManager);

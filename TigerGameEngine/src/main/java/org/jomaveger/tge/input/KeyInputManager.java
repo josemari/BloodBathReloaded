@@ -33,7 +33,7 @@ public final class KeyInputManager implements IDisposable, KeyListener {
     }
 
     public void init() {
-        this.window.addKeyboardManager(this);
+        this.window.addKeyInputManager(this);
     }
 
     public ScreenManager getWindow() {

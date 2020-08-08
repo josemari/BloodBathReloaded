@@ -57,7 +57,7 @@ public final class MouseInputManager implements IDisposable, MouseListener, Mous
 	}
 	
 	public void init() {
-		this.window.addMouseManager(this);
+		this.window.addMouseInputManager(this);
 	}
 	
 	public ScreenManager getWindow() {
