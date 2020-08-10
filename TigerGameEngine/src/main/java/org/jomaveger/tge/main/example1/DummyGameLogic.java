@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.main.example1;
+package org.jomaveger.tge.main.example1;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -12,35 +12,24 @@ public class DummyGameLogic implements IGameLogic {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void init(ScreenManager window) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void input(ScreenManager window, KeyInputManager keyInput, MouseInputManager mouseInput) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void update(float interval, KeyInputManager keyInput, MouseInputManager mouseInput, ScreenManager window) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void render(ScreenManager window) {
 		Graphics2D g = window.getGraphics();
-		g.setColor(Color.BLUE);
-		g.drawLine(10, 20, 10, 20);
-		g.drawLine(50, 60, 50, 60);
+		g.setColor(Color.RED);
+		g.drawLine(window.getWidth() / 2, window.getHeight() / 2, window.getWidth() / 2, window.getHeight() / 2);
 	}
-
-	
 }

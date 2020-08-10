@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.datastructures;
+package org.jomaveger.tge.datastructures;
 
 import java.io.Serializable;
 import java.util.Comparator;

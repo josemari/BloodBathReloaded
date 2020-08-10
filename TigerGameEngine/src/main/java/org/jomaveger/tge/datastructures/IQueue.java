@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.datastructures;
+package org.jomaveger.tge.datastructures;
 
 import com.google.java.contract.Ensures;
 import com.google.java.contract.Requires;

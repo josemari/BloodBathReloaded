@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.datastructures;
+package org.jomaveger.tge.datastructures;
 
 public interface IBoundedQueue<T> extends IQueue<T> {
     
