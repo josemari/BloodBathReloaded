@@ -2,6 +2,8 @@ package org.jomaveger.tiger.math;
 
 import java.util.Objects;
 
+import org.jomaveger.tge.math.Vector;
+
 public final class Plane {
     
     public Vector normal;

@@ -1,6 +1,6 @@
 package org.jomaveger.tiger.architecture;
 
-import org.jomaveger.tiger.math.Vector;
+import org.jomaveger.tge.math.Vector;
 
 public class TransformData {
 	

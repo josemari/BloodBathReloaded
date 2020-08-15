@@ -1,4 +1,6 @@
-package org.jomaveger.tiger.math;
+package org.jomaveger.tge.math;
+
+import org.jomaveger.tiger.math.Matrix;
 
 public final class Quaternion {
     

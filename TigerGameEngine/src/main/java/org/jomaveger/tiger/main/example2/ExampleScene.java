@@ -2,8 +2,8 @@ package org.jomaveger.tiger.main.example2;
 
 import java.awt.Color;
 
+import org.jomaveger.tge.math.MathUtil;
 import org.jomaveger.tiger.architecture.Scene;
-import org.jomaveger.tiger.math.MathUtil;
 
 public class ExampleScene extends Scene {
 	

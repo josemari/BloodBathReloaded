@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.math;
+package org.jomaveger.tge.math;
 
 public final class Vector {
     
@@ -94,7 +94,7 @@ public final class Vector {
     }
     
     public float length() {
-        return (float) MathUtil.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+        return MathUtil.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     }
     
     public Vector normalize() {

@@ -1,6 +1,6 @@
 package org.jomaveger.tge.graphics;
 
-import org.jomaveger.tiger.math.MathUtil;
+import org.jomaveger.tge.math.MathUtil;
 
 public final class Transformation {
 

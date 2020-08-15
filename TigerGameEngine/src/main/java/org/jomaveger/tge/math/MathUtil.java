@@ -1,4 +1,4 @@
-package org.jomaveger.tiger.math;
+package org.jomaveger.tge.math;
 
 public final class MathUtil {
 	

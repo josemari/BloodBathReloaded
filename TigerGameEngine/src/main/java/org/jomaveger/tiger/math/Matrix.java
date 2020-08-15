@@ -1,5 +1,8 @@
 package org.jomaveger.tiger.math;
 
+import org.jomaveger.tge.math.MathUtil;
+import org.jomaveger.tge.math.Vector;
+
 public final class Matrix {
     
     public float Xx, Xy, Xz, Xw;
