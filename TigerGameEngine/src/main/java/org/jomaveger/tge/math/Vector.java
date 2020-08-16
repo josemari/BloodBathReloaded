@@ -127,17 +127,17 @@ public final class Vector {
         return this.subtract(temp); // E - 2n(E.n)
     }
     
-    //Rodrigues' Rotation Formula
+    //Rodrigues' Rotation Formula, angle in radians
     // resul = v cos + (k x v) sin + k(k.v)(1 - cos)
-    public Vector rotate(float angle, Vector normal) {
+    public Vector rotate(float angle, Vector axis) {
         float cosine = MathUtil.cos(angle);
         float sine = MathUtil.sin(angle);
         
         Vector term1 = this.multiply(cosine);
-        Vector term2 = normal.crossProduct(this).multiply(sine);
-        float dotProduct = this.dotProduct(normal);
+        Vector term2 = axis.crossProduct(this).multiply(sine);
+        float dotProduct = this.dotProduct(axis);
         dotProduct *= (1 - cosine);
-        Vector term3 = normal.multiply(dotProduct);
+        Vector term3 = axis.multiply(dotProduct);
         
         return term1.add(term2).add(term3);
     }
