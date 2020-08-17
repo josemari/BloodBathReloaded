@@ -1,7 +1,5 @@
 package org.jomaveger.tge.math;
 
-import org.jomaveger.tiger.math.Matrix;
-
 public final class Quaternion {
     
     public float x;
