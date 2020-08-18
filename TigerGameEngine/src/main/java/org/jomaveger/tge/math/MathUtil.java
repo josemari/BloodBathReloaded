@@ -1,9 +1,6 @@
 package org.jomaveger.tge.math;
 
-public final class MathUtil {
-	
-	private MathUtil() {		
-	}
+public interface MathUtil {
     
     public static final float PI = (float) Math.PI;
     

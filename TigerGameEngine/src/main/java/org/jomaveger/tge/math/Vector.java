@@ -97,6 +97,10 @@ public final class Vector {
         return MathUtil.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
     }
     
+    public float lengthSquared() {
+    	return this.x * this.x + this.y * this.y + this.z * this.z;
+    }
+    
     public Vector normalize() {
         return this.divide(this.length());
     }
@@ -111,12 +115,24 @@ public final class Vector {
         return angle;    
     }
     
-    public float distance(Vector vec) {
-        Vector res = this.subtract(vec);
+    public float distance(Vector point) {
+        Vector res = this.subtract(point);
     	
     	float distance = res.length();
 
     	return distance;
+    }
+
+    public float distanceSquared(Vector point) {
+        Vector res = this.subtract(point);
+    	
+    	float distance = res.lengthSquared();
+
+    	return distance;
+    }
+
+    public Vector perpendicular() {
+    	return new Vector(0, -z, y);
     }
     
     //R = E - 2n(E.n)
