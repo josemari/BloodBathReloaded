@@ -51,4 +51,8 @@ public interface MathUtil {
     public static float pow(float base, float exponent) {
         return (float) Math.pow(base, exponent);
     }
+    
+    public static float fma(float a, float b, float c) {
+    	return a * b + c;
+    }
 }

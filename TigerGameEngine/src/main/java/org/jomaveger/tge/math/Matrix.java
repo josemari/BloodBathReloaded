@@ -2,120 +2,120 @@ package org.jomaveger.tge.math;
 
 public final class Matrix {
     
-    public float Xx, Xy, Xz, Xw;
-    public float Yx, Yy, Yz, Yw;
-    public float Zx, Zy, Zz, Zw;
-    public float Tx, Ty, Tz, Tw;
+    public float m11, m12, m13, m14;
+    public float m21, m22, m23, m24;
+    public float m31, m32, m33, m34;
+    public float m41, m42, m43, m44;
     
     public Matrix() {
-    	this.Xx = 1.0f;
-        this.Xy = 0.0f;
-        this.Xz = 0.0f;
-        this.Xw = 0.0f;
+    	this.m11 = 1.0f;
+        this.m12 = 0.0f;
+        this.m13 = 0.0f;
+        this.m14 = 0.0f;
         
-        this.Yx = 0.0f;
-        this.Yy = 1.0f;
-        this.Yz = 0.0f;
-        this.Yw = 0.0f;
+        this.m21 = 0.0f;
+        this.m22 = 1.0f;
+        this.m23 = 0.0f;
+        this.m24 = 0.0f;
         
-        this.Zx = 0.0f;
-        this.Zy = 0.0f;
-        this.Zz = 1.0f;
-        this.Zw = 0.0f;
+        this.m31 = 0.0f;
+        this.m32 = 0.0f;
+        this.m33 = 1.0f;
+        this.m34 = 0.0f;
         
-        this.Tx = 0.0f;
-        this.Ty = 0.0f;
-        this.Tz = 0.0f;
-        this.Tw = 1.0f;
+        this.m41 = 0.0f;
+        this.m42 = 0.0f;
+        this.m43 = 0.0f;
+        this.m44 = 1.0f;
     }
 
     public Matrix identity() {
-        this.Xx = 1.0f;
-        this.Xy = 0.0f;
-        this.Xz = 0.0f;
-        this.Xw = 0.0f;
+        this.m11 = 1.0f;
+        this.m12 = 0.0f;
+        this.m13 = 0.0f;
+        this.m14 = 0.0f;
         
-        this.Yx = 0.0f;
-        this.Yy = 1.0f;
-        this.Yz = 0.0f;
-        this.Yw = 0.0f;
+        this.m21 = 0.0f;
+        this.m22 = 1.0f;
+        this.m23 = 0.0f;
+        this.m24 = 0.0f;
         
-        this.Zx = 0.0f;
-        this.Zy = 0.0f;
-        this.Zz = 1.0f;
-        this.Zw = 0.0f;
+        this.m31 = 0.0f;
+        this.m32 = 0.0f;
+        this.m33 = 1.0f;
+        this.m34 = 0.0f;
         
-        this.Tx = 0.0f;
-        this.Ty = 0.0f;
-        this.Tz = 0.0f;
-        this.Tw = 1.0f;
+        this.m41 = 0.0f;
+        this.m42 = 0.0f;
+        this.m43 = 0.0f;
+        this.m44 = 1.0f;
         return this;
     }
     
     public Matrix(float _11, float _12, float _13, float _14, float _21, float _22, float _23, float _24, 
                     float _31, float _32, float _33, float _34, float _41, float _42, float _43, float _44) {
-        this.Xx = _11;
-        this.Xy = _12;
-        this.Xz = _13;
-        this.Xw = _14;
+        this.m11 = _11;
+        this.m12 = _12;
+        this.m13 = _13;
+        this.m14 = _14;
         
-        this.Yx = _21;
-        this.Yy = _22;
-        this.Yz = _23;
-        this.Yw = _24;
+        this.m21 = _21;
+        this.m22 = _22;
+        this.m23 = _23;
+        this.m24 = _24;
         
-        this.Zx = _31;
-        this.Zy = _32;
-        this.Zz = _33;
-        this.Zw = _34;
+        this.m31 = _31;
+        this.m32 = _32;
+        this.m33 = _33;
+        this.m34 = _34;
         
-        this.Tx = _41;
-        this.Ty = _42;
-        this.Tz = _43;
-        this.Tw = _44;
+        this.m41 = _41;
+        this.m42 = _42;
+        this.m43 = _43;
+        this.m44 = _44;
     }
     
     public Matrix(Matrix mat) {
-        this.Xx = mat.Xx;
-        this.Xy = mat.Xy;
-        this.Xz = mat.Xz;
-        this.Xw = mat.Xw;
+        this.m11 = mat.m11;
+        this.m12 = mat.m12;
+        this.m13 = mat.m13;
+        this.m14 = mat.m14;
         
-        this.Yx = mat.Yx;
-        this.Yy = mat.Yy;
-        this.Yz = mat.Yz;
-        this.Yw = mat.Yw;
+        this.m21 = mat.m21;
+        this.m22 = mat.m22;
+        this.m23 = mat.m23;
+        this.m24 = mat.m24;
         
-        this.Zx = mat.Zx;
-        this.Zy = mat.Zy;
-        this.Zz = mat.Zz;
-        this.Zw = mat.Zw;
+        this.m31 = mat.m31;
+        this.m32 = mat.m32;
+        this.m33 = mat.m33;
+        this.m34 = mat.m34;
         
-        this.Tx = mat.Tx;
-        this.Ty = mat.Ty;
-        this.Tz = mat.Tz;
-        this.Tw = mat.Tw;
+        this.m41 = mat.m41;
+        this.m42 = mat.m42;
+        this.m43 = mat.m43;
+        this.m44 = mat.m44;
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 59 * hash + Float.floatToIntBits(this.Xx);
-        hash = 59 * hash + Float.floatToIntBits(this.Xy);
-        hash = 59 * hash + Float.floatToIntBits(this.Xz);
-        hash = 59 * hash + Float.floatToIntBits(this.Xw);
-        hash = 59 * hash + Float.floatToIntBits(this.Yx);
-        hash = 59 * hash + Float.floatToIntBits(this.Yy);
-        hash = 59 * hash + Float.floatToIntBits(this.Yz);
-        hash = 59 * hash + Float.floatToIntBits(this.Yw);
-        hash = 59 * hash + Float.floatToIntBits(this.Zx);
-        hash = 59 * hash + Float.floatToIntBits(this.Zy);
-        hash = 59 * hash + Float.floatToIntBits(this.Zz);
-        hash = 59 * hash + Float.floatToIntBits(this.Zw);
-        hash = 59 * hash + Float.floatToIntBits(this.Tx);
-        hash = 59 * hash + Float.floatToIntBits(this.Ty);
-        hash = 59 * hash + Float.floatToIntBits(this.Tz);
-        hash = 59 * hash + Float.floatToIntBits(this.Tw);
+        hash = 59 * hash + Float.floatToIntBits(this.m11);
+        hash = 59 * hash + Float.floatToIntBits(this.m12);
+        hash = 59 * hash + Float.floatToIntBits(this.m13);
+        hash = 59 * hash + Float.floatToIntBits(this.m14);
+        hash = 59 * hash + Float.floatToIntBits(this.m21);
+        hash = 59 * hash + Float.floatToIntBits(this.m22);
+        hash = 59 * hash + Float.floatToIntBits(this.m23);
+        hash = 59 * hash + Float.floatToIntBits(this.m24);
+        hash = 59 * hash + Float.floatToIntBits(this.m31);
+        hash = 59 * hash + Float.floatToIntBits(this.m32);
+        hash = 59 * hash + Float.floatToIntBits(this.m33);
+        hash = 59 * hash + Float.floatToIntBits(this.m34);
+        hash = 59 * hash + Float.floatToIntBits(this.m41);
+        hash = 59 * hash + Float.floatToIntBits(this.m42);
+        hash = 59 * hash + Float.floatToIntBits(this.m43);
+        hash = 59 * hash + Float.floatToIntBits(this.m44);
         return hash;
     }
 
@@ -131,85 +131,90 @@ public final class Matrix {
             return false;
         }
         final Matrix other = (Matrix) obj;
-        if (Float.floatToIntBits(this.Xx) != Float.floatToIntBits(other.Xx)) {
+        if (Float.floatToIntBits(this.m11) != Float.floatToIntBits(other.m11)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Xy) != Float.floatToIntBits(other.Xy)) {
+        if (Float.floatToIntBits(this.m12) != Float.floatToIntBits(other.m12)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Xz) != Float.floatToIntBits(other.Xz)) {
+        if (Float.floatToIntBits(this.m13) != Float.floatToIntBits(other.m13)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Xw) != Float.floatToIntBits(other.Xw)) {
+        if (Float.floatToIntBits(this.m14) != Float.floatToIntBits(other.m14)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Yx) != Float.floatToIntBits(other.Yx)) {
+        if (Float.floatToIntBits(this.m21) != Float.floatToIntBits(other.m21)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Yy) != Float.floatToIntBits(other.Yy)) {
+        if (Float.floatToIntBits(this.m22) != Float.floatToIntBits(other.m22)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Yz) != Float.floatToIntBits(other.Yz)) {
+        if (Float.floatToIntBits(this.m23) != Float.floatToIntBits(other.m23)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Yw) != Float.floatToIntBits(other.Yw)) {
+        if (Float.floatToIntBits(this.m24) != Float.floatToIntBits(other.m24)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Zx) != Float.floatToIntBits(other.Zx)) {
+        if (Float.floatToIntBits(this.m31) != Float.floatToIntBits(other.m31)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Zy) != Float.floatToIntBits(other.Zy)) {
+        if (Float.floatToIntBits(this.m32) != Float.floatToIntBits(other.m32)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Zz) != Float.floatToIntBits(other.Zz)) {
+        if (Float.floatToIntBits(this.m33) != Float.floatToIntBits(other.m33)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Zw) != Float.floatToIntBits(other.Zw)) {
+        if (Float.floatToIntBits(this.m34) != Float.floatToIntBits(other.m34)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Tx) != Float.floatToIntBits(other.Tx)) {
+        if (Float.floatToIntBits(this.m41) != Float.floatToIntBits(other.m41)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Ty) != Float.floatToIntBits(other.Ty)) {
+        if (Float.floatToIntBits(this.m42) != Float.floatToIntBits(other.m42)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Tz) != Float.floatToIntBits(other.Tz)) {
+        if (Float.floatToIntBits(this.m43) != Float.floatToIntBits(other.m43)) {
             return false;
         }
-        if (Float.floatToIntBits(this.Tw) != Float.floatToIntBits(other.Tw)) {
+        if (Float.floatToIntBits(this.m44) != Float.floatToIntBits(other.m44)) {
             return false;
         }
         return true;
     }
     
+    @Override
+    public String toString() {
+        return "Matrix{" + "m11=" + m11 + ", m12=" + m12 + ", m13=" + m13 + ", m14=" + m14 + ", \n m21=" + m21 + ", m22=" + m22 + ", m23=" + m23 + ", m24=" + m24 + ", \n m31=" + m31 + ", m32=" + m32 + ", m33=" + m33 + ", m34=" + m34 + ", \n m41=" + m41 + ", m42=" + m42 + ", m43=" + m43 + ", m44=" + m44 + '}';
+    }
+    
     public Matrix zero() {
-        this.Xx = 0.0f;
-        this.Xy = 0.0f;
-        this.Xz = 0.0f;
-        this.Xw = 0.0f;
+        this.m11 = 0.0f;
+        this.m12 = 0.0f;
+        this.m13 = 0.0f;
+        this.m14 = 0.0f;
         
-        this.Yx = 0.0f;
-        this.Yy = 0.0f;
-        this.Yz = 0.0f;
-        this.Yw = 0.0f;
+        this.m21 = 0.0f;
+        this.m22 = 0.0f;
+        this.m23 = 0.0f;
+        this.m24 = 0.0f;
         
-        this.Zx = 0.0f;
-        this.Zy = 0.0f;
-        this.Zz = 0.0f;
-        this.Zw = 0.0f;
+        this.m31 = 0.0f;
+        this.m32 = 0.0f;
+        this.m33 = 0.0f;
+        this.m34 = 0.0f;
         
-        this.Tx = 0.0f;
-        this.Ty = 0.0f;
-        this.Tz = 0.0f;
-        this.Tw = 0.0f;
+        this.m41 = 0.0f;
+        this.m42 = 0.0f;
+        this.m43 = 0.0f;
+        this.m44 = 0.0f;
         return this;
     }
     
     public boolean isZero() {
-        if (this.Xx == 0.0f && this.Xy == 0.0f && this.Xz == 0.0f && this.Xw == 0.0f &&
-            this.Yx == 0.0f && this.Yy == 0.0f && this.Yz == 0.0f && this.Yw == 0.0f &&
-            this.Zx == 0.0f && this.Zy == 0.0f && this.Zz == 0.0f && this.Zw == 0.0f &&
-            this.Tx == 0.0f && this.Ty == 0.0f && this.Tz == 0.0f && this.Tw == 0.0f) {
+        if (this.m11 == 0.0f && this.m12 == 0.0f && this.m13 == 0.0f && this.m14 == 0.0f &&
+            this.m21 == 0.0f && this.m22 == 0.0f && this.m23 == 0.0f && this.m24 == 0.0f &&
+            this.m31 == 0.0f && this.m32 == 0.0f && this.m33 == 0.0f && this.m34 == 0.0f &&
+            this.m41 == 0.0f && this.m42 == 0.0f && this.m43 == 0.0f && this.m44 == 0.0f) {
             
             return true;
             
@@ -221,10 +226,10 @@ public final class Matrix {
     }
     
     public boolean isIdentity() {
-        if (this.Xx == 1.0f && this.Xy == 0.0f && this.Xz == 0.0f && this.Xw == 0.0f &&
-            this.Yx == 0.0f && this.Yy == 1.0f && this.Yz == 0.0f && this.Yw == 0.0f &&
-            this.Zx == 0.0f && this.Zy == 0.0f && this.Zz == 1.0f && this.Zw == 0.0f &&
-            this.Tx == 0.0f && this.Ty == 0.0f && this.Tz == 0.0f && this.Tw == 1.0f) {
+        if (this.m11 == 1.0f && this.m12 == 0.0f && this.m13 == 0.0f && this.m14 == 0.0f &&
+            this.m21 == 0.0f && this.m22 == 1.0f && this.m23 == 0.0f && this.m24 == 0.0f &&
+            this.m31 == 0.0f && this.m32 == 0.0f && this.m33 == 1.0f && this.m34 == 0.0f &&
+            this.m41 == 0.0f && this.m42 == 0.0f && this.m43 == 0.0f && this.m44 == 1.0f) {
             
             return true;
             
@@ -235,36 +240,36 @@ public final class Matrix {
         }
     }
     
-    public Matrix transpose() {
-		float temp = this.Xy;
-		this.Xy = this.Yx;
-		this.Yx = temp;
-
-		temp = this.Xz;
-		this.Xz = this.Zx;
-		this.Zx = temp;
-
-		temp = this.Xw;
-		this.Xw = this.Tx;
-		this.Tx = temp;
-
-		temp = this.Yz;
-		this.Yz = this.Zy;
-		this.Zy = temp;
-
-		temp = this.Yw;
-		this.Yw = this.Ty;
-		this.Ty = temp;
-
-		temp = this.Zw;
-		this.Zw = this.Tz;
-		this.Tz = temp;
-		return this;
+    public float[] toArray() {
+    	float[] array = new float[] {m11, m21, m31, m41, m12, m22, m32, m42, m13, m23, m33, m43, m14, m24, m34, m44};
+    	return array;
     }
+    
+    public Matrix transpose() {
+		float temp = this.m12;
+		this.m12 = this.m21;
+		this.m21 = temp;
 
-    @Override
-    public String toString() {
-        return "Matrix{" + "Xx=" + Xx + ", Xy=" + Xy + ", Xz=" + Xz + ", Xw=" + Xw + ", \n Yx=" + Yx + ", Yy=" + Yy + ", Yz=" + Yz + ", Yw=" + Yw + ", \n Zx=" + Zx + ", Zy=" + Zy + ", Zz=" + Zz + ", Zw=" + Zw + ", \n Tx=" + Tx + ", Ty=" + Ty + ", Tz=" + Tz + ", Tw=" + Tw + '}';
+		temp = this.m13;
+		this.m13 = this.m31;
+		this.m31 = temp;
+
+		temp = this.m14;
+		this.m14 = this.m41;
+		this.m41 = temp;
+
+		temp = this.m23;
+		this.m23 = this.m32;
+		this.m32 = temp;
+
+		temp = this.m24;
+		this.m24 = this.m42;
+		this.m42 = temp;
+
+		temp = this.m34;
+		this.m34 = this.m43;
+		this.m43 = temp;
+		return this;
     }
   
     public float determinant() {
@@ -274,165 +279,115 @@ public final class Matrix {
 
         mTrans.transpose();
 
-		fTemp[0] = mTrans.Zz * mTrans.Tw;
-		fTemp[1] = mTrans.Zw * mTrans.Tz;
-		fTemp[2] = mTrans.Zy * mTrans.Tw;
-		fTemp[3] = mTrans.Zw * mTrans.Ty;
-		fTemp[4] = mTrans.Zy * mTrans.Tz;
-		fTemp[5] = mTrans.Zz * mTrans.Ty;
-		fTemp[6] = mTrans.Zx * mTrans.Tw;
-		fTemp[7] = mTrans.Zw * mTrans.Tx;
-		fTemp[8] = mTrans.Zx * mTrans.Tz;
-		fTemp[9] = mTrans.Zz * mTrans.Tx;
-		fTemp[10] = mTrans.Zx * mTrans.Ty;
-		fTemp[11] = mTrans.Zy * mTrans.Tx;
+		fTemp[0] = mTrans.m33 * mTrans.m44;
+		fTemp[1] = mTrans.m34 * mTrans.m43;
+		fTemp[2] = mTrans.m32 * mTrans.m44;
+		fTemp[3] = mTrans.m34 * mTrans.m42;
+		fTemp[4] = mTrans.m32 * mTrans.m43;
+		fTemp[5] = mTrans.m33 * mTrans.m42;
+		fTemp[6] = mTrans.m31 * mTrans.m44;
+		fTemp[7] = mTrans.m34 * mTrans.m41;
+		fTemp[8] = mTrans.m31 * mTrans.m43;
+		fTemp[9] = mTrans.m33 * mTrans.m41;
+		fTemp[10] = mTrans.m31 * mTrans.m42;
+		fTemp[11] = mTrans.m32 * mTrans.m41;
 
-		tempXx = fTemp[0] * mTrans.Yy + fTemp[3] * mTrans.Yz + fTemp[4] * mTrans.Yw;
-		tempXx -= fTemp[1] * mTrans.Yy + fTemp[2] * mTrans.Yz + fTemp[5] * mTrans.Yw;
+		tempXx = fTemp[0] * mTrans.m22 + fTemp[3] * mTrans.m23 + fTemp[4] * mTrans.m24;
+		tempXx -= fTemp[1] * mTrans.m22 + fTemp[2] * mTrans.m23 + fTemp[5] * mTrans.m24;
 
-		tempXy = fTemp[1] * mTrans.Yx + fTemp[6] * mTrans.Yz + fTemp[9] * mTrans.Yw;
-		tempXy -= fTemp[0] * mTrans.Yx + fTemp[7] * mTrans.Yz + fTemp[8] * mTrans.Yw;
+		tempXy = fTemp[1] * mTrans.m21 + fTemp[6] * mTrans.m23 + fTemp[9] * mTrans.m24;
+		tempXy -= fTemp[0] * mTrans.m21 + fTemp[7] * mTrans.m23 + fTemp[8] * mTrans.m24;
 
-		tempXz = fTemp[2] * mTrans.Yx + fTemp[7] * mTrans.Yy + fTemp[10] * mTrans.Yw;
-		tempXz -= fTemp[3] * mTrans.Yx + fTemp[6] * mTrans.Yy + fTemp[11] * mTrans.Yw;
+		tempXz = fTemp[2] * mTrans.m21 + fTemp[7] * mTrans.m22 + fTemp[10] * mTrans.m24;
+		tempXz -= fTemp[3] * mTrans.m21 + fTemp[6] * mTrans.m22 + fTemp[11] * mTrans.m24;
 
-		tempXw = fTemp[5] * mTrans.Yx + fTemp[8] * mTrans.Yy + fTemp[11] * mTrans.Yz;
-		tempXw -= fTemp[4] * mTrans.Yx + fTemp[9] * mTrans.Yy + fTemp[10] * mTrans.Yz;
+		tempXw = fTemp[5] * mTrans.m21 + fTemp[8] * mTrans.m22 + fTemp[11] * mTrans.m23;
+		tempXw -= fTemp[4] * mTrans.m21 + fTemp[9] * mTrans.m22 + fTemp[10] * mTrans.m23;
 
-		fDet = mTrans.Xx * tempXx + mTrans.Xy * tempXy + mTrans.Xz * tempXz + mTrans.Xw * tempXw;
+		fDet = mTrans.m11 * tempXx + mTrans.m12 * tempXy + mTrans.m13 * tempXz + mTrans.m14 * tempXw;
 
 		return fDet;
     }
     
     public Matrix inverse() {
-        Matrix mTrans = new Matrix(this);
-        float[] fTemp = new float[12];
-        float fDet;
+    	
+    	float a = m11 * m22 - m12 * m21;
+        float b = m11 * m23 - m13 * m21;
+        float c = m11 * m24 - m14 * m21;
+        float d = m12 * m23 - m13 * m22;
+        float e = m12 * m24 - m14 * m22;
+        float f = m13 * m24 - m14 * m23;
+        float g = m31 * m42 - m32 * m41;
+        float h = m31 * m43 - m33 * m41;
+        float i = m31 * m44 - m34 * m41;
+        float j = m32 * m43 - m33 * m42;
+        float k = m32 * m44 - m34 * m42;
+        float l = m33 * m44 - m34 * m43;
+        
+        float det = a * l - b * k + c * j + d * i - e * h + f * g;
+        det = 1.0f / det;
+        
+        float nm11 = MathUtil.fma( m22, l, MathUtil.fma(-m23, k,  m23 * j)) * det;
+        float nm12 = MathUtil.fma(-m12, l, MathUtil.fma( m13, k, -m14 * j)) * det;
+        float nm13 = MathUtil.fma( m42, f, MathUtil.fma(-m43, e,  m44 * d)) * det;
+        float nm14 = MathUtil.fma(-m32, f, MathUtil.fma( m33, e, -m34 * d)) * det;
+        float nm21 = MathUtil.fma(-m21, l, MathUtil.fma( m23, i, -m24 * h)) * det;
+        float nm22 = MathUtil.fma( m11, l, MathUtil.fma(-m13, i,  m14 * h)) * det;
+        float nm23 = MathUtil.fma(-m41, f, MathUtil.fma( m43, c, -m44 * b)) * det;
+        float nm24 = MathUtil.fma( m31, f, MathUtil.fma(-m33, c,  m34 * b)) * det;
+        float nm31 = MathUtil.fma( m21, k, MathUtil.fma(-m22, i,  m24 * g)) * det;
+        float nm32 = MathUtil.fma(-m11, k, MathUtil.fma( m12, i, -m14 * g)) * det;
+        float nm33 = MathUtil.fma( m41, e, MathUtil.fma(-m42, c,  m44 * a)) * det;
+        float nm34 = MathUtil.fma(-m31, e, MathUtil.fma( m32, c, -m34 * a)) * det;
+        float nm41 = MathUtil.fma(-m21, j, MathUtil.fma( m22, h, -m23 * g)) * det;
+        float nm42 = MathUtil.fma( m11, j, MathUtil.fma(-m12, h,  m13 * g)) * det;
+        float nm43 = MathUtil.fma(-m41, d, MathUtil.fma( m42, b, -m43 * a)) * det;
+        float nm44 = MathUtil.fma( m31, d, MathUtil.fma(-m32, b,  m33 * a)) * det;
+        
+        this.m11 = (Float.compare(-0.0f, nm11) == 0) ? 0.0f : nm11;
+		this.m12 = (Float.compare(-0.0f, nm12) == 0) ? 0.0f : nm12;
+		this.m13 = (Float.compare(-0.0f, nm13) == 0) ? 0.0f : nm13;
+		this.m14 = (Float.compare(-0.0f, nm14) == 0) ? 0.0f : nm14;
 
-		mTrans.transpose();
+		this.m21 = (Float.compare(-0.0f, nm21) == 0) ? 0.0f : nm21;
+		this.m22 = (Float.compare(-0.0f, nm22) == 0) ? 0.0f : nm22;
+		this.m23 = (Float.compare(-0.0f, nm23) == 0) ? 0.0f : nm23;
+		this.m24 = (Float.compare(-0.0f, nm24) == 0) ? 0.0f : nm24;
 
-		fTemp[0] = mTrans.Zz * mTrans.Tw;
-		fTemp[1] = mTrans.Zw * mTrans.Tz;
-		fTemp[2] = mTrans.Zy * mTrans.Tw;
-		fTemp[3] = mTrans.Zw * mTrans.Ty;
-		fTemp[4] = mTrans.Zy * mTrans.Tz;
-		fTemp[5] = mTrans.Zz * mTrans.Ty;
-		fTemp[6] = mTrans.Zx * mTrans.Tw;
-		fTemp[7] = mTrans.Zw * mTrans.Tx;
-		fTemp[8] = mTrans.Zx * mTrans.Tz;
-		fTemp[9] = mTrans.Zz * mTrans.Tx;
-		fTemp[10] = mTrans.Zx * mTrans.Ty;
-		fTemp[11] = mTrans.Zy * mTrans.Tx;
+		this.m31 = (Float.compare(-0.0f, nm31) == 0) ? 0.0f : nm31;
+		this.m32 = (Float.compare(-0.0f, nm32) == 0) ? 0.0f : nm32;
+		this.m33 = (Float.compare(-0.0f, nm33) == 0) ? 0.0f : nm33;
+		this.m34 = (Float.compare(-0.0f, nm34) == 0) ? 0.0f : nm34;
 
-		this.Xx = fTemp[0] * mTrans.Yy + fTemp[3] * mTrans.Yz + fTemp[4] * mTrans.Yw;
-		this.Xx -= fTemp[1] * mTrans.Yy + fTemp[2] * mTrans.Yz + fTemp[5] * mTrans.Yw;
-
-		this.Xy = fTemp[1] * mTrans.Yx + fTemp[6] * mTrans.Yz + fTemp[9] * mTrans.Yw;
-		this.Xy -= fTemp[0] * mTrans.Yx + fTemp[7] * mTrans.Yz + fTemp[8] * mTrans.Yw;
-
-		this.Xz = fTemp[2] * mTrans.Yx + fTemp[7] * mTrans.Yy + fTemp[10] * mTrans.Yw;
-		this.Xz -= fTemp[3] * mTrans.Yx + fTemp[6] * mTrans.Yy + fTemp[11] * mTrans.Yw;
-
-		this.Xw = fTemp[5] * mTrans.Yx + fTemp[8] * mTrans.Yy + fTemp[11] * mTrans.Yz;
-		this.Xw -= fTemp[4] * mTrans.Yx + fTemp[9] * mTrans.Yy + fTemp[10] * mTrans.Yz;
-
-		this.Yx = fTemp[1] * mTrans.Xy + fTemp[2] * mTrans.Xz + fTemp[5] * mTrans.Xw;
-		this.Yx -= fTemp[0] * mTrans.Xy + fTemp[3] * mTrans.Xz + fTemp[4] * mTrans.Xw;
-
-		this.Yy = fTemp[0] * mTrans.Xx + fTemp[7] * mTrans.Xz + fTemp[8] * mTrans.Xw;
-		this.Yy -= fTemp[1] * mTrans.Xx + fTemp[6] * mTrans.Xz + fTemp[9] * mTrans.Xw;
-
-		this.Yz = fTemp[3] * mTrans.Xx + fTemp[6] * mTrans.Xy + fTemp[11] * mTrans.Xw;
-		this.Yz -= fTemp[2] * mTrans.Xx + fTemp[7] * mTrans.Xy + fTemp[10] * mTrans.Xw;
-
-		this.Yw = fTemp[4] * mTrans.Xx + fTemp[9] * mTrans.Xy + fTemp[10] * mTrans.Xz;
-		this.Yw -= fTemp[5] * mTrans.Xx + fTemp[8] * mTrans.Xy + fTemp[11] * mTrans.Xz;
-
-		fTemp[0] = mTrans.Xz * mTrans.Yw;
-		fTemp[1] = mTrans.Xw * mTrans.Yz;
-		fTemp[2] = mTrans.Xy * mTrans.Yw;
-		fTemp[3] = mTrans.Xw * mTrans.Yy;
-		fTemp[4] = mTrans.Xy * mTrans.Yz;
-		fTemp[5] = mTrans.Xz * mTrans.Yy;
-		fTemp[6] = mTrans.Xx * mTrans.Yw;
-		fTemp[7] = mTrans.Xw * mTrans.Yx;
-		fTemp[8] = mTrans.Xx * mTrans.Yz;
-		fTemp[9] = mTrans.Xz * mTrans.Yx;
-		fTemp[10] = mTrans.Xx * mTrans.Yy;
-		fTemp[11] = mTrans.Xy * mTrans.Yx;
-
-		this.Zx = fTemp[0] * mTrans.Ty + fTemp[3] * mTrans.Tz + fTemp[4] * mTrans.Tw;
-		this.Zx -= fTemp[1] * mTrans.Ty + fTemp[2] * mTrans.Tz + fTemp[5] * mTrans.Tw;
-
-		this.Zy = fTemp[1] * mTrans.Tx + fTemp[6] * mTrans.Tz + fTemp[9] * mTrans.Tw;
-		this.Zy -= fTemp[0] * mTrans.Tx + fTemp[7] * mTrans.Tz + fTemp[8] * mTrans.Tw;
-
-		this.Zz = fTemp[2] * mTrans.Tx + fTemp[7] * mTrans.Ty + fTemp[10] * mTrans.Tw;
-		this.Zz -= fTemp[3] * mTrans.Tx + fTemp[6] * mTrans.Ty + fTemp[11] * mTrans.Tw;
-
-		this.Zw = fTemp[5] * mTrans.Tx + fTemp[8] * mTrans.Ty + fTemp[11] * mTrans.Tz;
-		this.Zw -= fTemp[4] * mTrans.Tx + fTemp[9] * mTrans.Ty + fTemp[10] * mTrans.Tz;
-
-		this.Tx = fTemp[2] * mTrans.Zz + fTemp[5] * mTrans.Zw + fTemp[1] * mTrans.Zy;
-		this.Tx -= fTemp[4] * mTrans.Zw + fTemp[0] * mTrans.Zy + fTemp[3] * mTrans.Zz;
-
-		this.Ty = fTemp[8] * mTrans.Zw + fTemp[0] * mTrans.Zx + fTemp[7] * mTrans.Zz;
-		this.Ty -= fTemp[6] * mTrans.Zz + fTemp[9] * mTrans.Zw + fTemp[1] * mTrans.Zx;
-
-		this.Tz = fTemp[6] * mTrans.Zy + fTemp[11] * mTrans.Zw + fTemp[3] * mTrans.Zx;
-		this.Tz -= fTemp[10] * mTrans.Zw + fTemp[2] * mTrans.Zx + fTemp[7] * mTrans.Zy;
-
-		this.Tw = fTemp[10] * mTrans.Zz + fTemp[4] * mTrans.Zx + fTemp[9] * mTrans.Zy;
-		this.Tw -= fTemp[8] * mTrans.Zy + fTemp[11] * mTrans.Zz + fTemp[5] * mTrans.Zx;
-
-		fDet = mTrans.Xx * this.Xx + mTrans.Xy * this.Xy + mTrans.Xz * this.Xz + mTrans.Xw * this.Xw;
-
-		fDet = 1 / fDet;
-
-		this.Xx *= fDet;
-		this.Xy *= fDet;
-		this.Xz *= fDet;
-		this.Xw *= fDet;
-
-		this.Yx *= fDet;
-		this.Yy *= fDet;
-		this.Yz *= fDet;
-		this.Yw *= fDet;
-
-		this.Zx *= fDet;
-		this.Zy *= fDet;
-		this.Zz *= fDet;
-		this.Zw *= fDet;
-
-		this.Tx *= fDet;
-		this.Ty *= fDet;
-		this.Tz *= fDet;
-		this.Tw *= fDet;
+		this.m41 = (Float.compare(-0.0f, nm41) == 0) ? 0.0f : nm41;
+		this.m42 = (Float.compare(-0.0f, nm42) == 0) ? 0.0f : nm42;
+		this.m43 = (Float.compare(-0.0f, nm43) == 0) ? 0.0f : nm43;
+		this.m44 = (Float.compare(-0.0f, nm44) == 0) ? 0.0f : nm44;
 		return this;
 	}
 
 	public Matrix negate() {
 		Matrix result = new Matrix();
 
-		result.Xx = -1 * this.Xx;
-		result.Xy = -1 * this.Xy;
-		result.Xz = -1 * this.Xz;
-		result.Xw = -1 * this.Xw;
+		result.m11 = -1 * this.m11;
+		result.m12 = -1 * this.m12;
+		result.m13 = -1 * this.m13;
+		result.m14 = -1 * this.m14;
 
-		result.Yx = -1 * this.Yx;
-		result.Yy = -1 * this.Yy;
-		result.Yz = -1 * this.Yz;
-		result.Yw = -1 * this.Yw;
+		result.m21 = -1 * this.m21;
+		result.m22 = -1 * this.m22;
+		result.m23 = -1 * this.m23;
+		result.m24 = -1 * this.m24;
 
-		result.Zx = -1 * this.Zx;
-		result.Zy = -1 * this.Zy;
-		result.Zz = -1 * this.Zz;
-		result.Zw = -1 * this.Zw;
+		result.m31 = -1 * this.m31;
+		result.m32 = -1 * this.m32;
+		result.m33 = -1 * this.m33;
+		result.m34 = -1 * this.m34;
 
-		result.Tx = -1 * this.Tx;
-		result.Ty = -1 * this.Ty;
-		result.Tz = -1 * this.Tz;
-		result.Tw = -1 * this.Tw;
+		result.m41 = -1 * this.m41;
+		result.m42 = -1 * this.m42;
+		result.m43 = -1 * this.m43;
+		result.m44 = -1 * this.m44;
 
 		return result;
     }
@@ -440,25 +395,25 @@ public final class Matrix {
     public Matrix multiply(float scalar) {
 		Matrix result = new Matrix();
 
-		result.Xx = scalar * this.Xx;
-		result.Xy = scalar * this.Xy;
-		result.Xz = scalar * this.Xz;
-		result.Xw = scalar * this.Xw;
+		result.m11 = scalar * this.m11;
+		result.m12 = scalar * this.m12;
+		result.m13 = scalar * this.m13;
+		result.m14 = scalar * this.m14;
 
-		result.Yx = scalar * this.Yx;
-		result.Yy = scalar * this.Yy;
-		result.Yz = scalar * this.Yz;
-		result.Yw = scalar * this.Yw;
+		result.m21 = scalar * this.m21;
+		result.m22 = scalar * this.m22;
+		result.m23 = scalar * this.m23;
+		result.m24 = scalar * this.m24;
 
-		result.Zx = scalar * this.Zx;
-		result.Zy = scalar * this.Zy;
-		result.Zz = scalar * this.Zz;
-		result.Zw = scalar * this.Zw;
+		result.m31 = scalar * this.m31;
+		result.m32 = scalar * this.m32;
+		result.m33 = scalar * this.m33;
+		result.m34 = scalar * this.m34;
 
-		result.Tx = scalar * this.Tx;
-		result.Ty = scalar * this.Ty;
-		result.Tz = scalar * this.Tz;
-		result.Tw = scalar * this.Tw;
+		result.m41 = scalar * this.m41;
+		result.m42 = scalar * this.m42;
+		result.m43 = scalar * this.m43;
+		result.m44 = scalar * this.m44;
         
         return result;
     }
@@ -466,25 +421,25 @@ public final class Matrix {
     public Matrix add(Matrix mat) {
 		Matrix result = new Matrix();
 
-		result.Xx = this.Xx + mat.Xx;
-		result.Xy = this.Xy + mat.Xy;
-		result.Xz = this.Xz + mat.Xz;
-		result.Xw = this.Xw + mat.Xw;
+		result.m11 = this.m11 + mat.m11;
+		result.m12 = this.m12 + mat.m12;
+		result.m13 = this.m13 + mat.m13;
+		result.m14 = this.m14 + mat.m14;
 
-		result.Yx = this.Yx + mat.Yx;
-		result.Yy = this.Yy + mat.Yy;
-		result.Yz = this.Yz + mat.Yz;
-		result.Yw = this.Yw + mat.Yw;
+		result.m21 = this.m21 + mat.m21;
+		result.m22 = this.m22 + mat.m22;
+		result.m23 = this.m23 + mat.m23;
+		result.m24 = this.m24 + mat.m24;
 
-		result.Zx = this.Zx + mat.Zx;
-		result.Zy = this.Zy + mat.Zy;
-		result.Zz = this.Zz + mat.Zz;
-		result.Zw = this.Zw + mat.Zw;
+		result.m31 = this.m31 + mat.m31;
+		result.m32 = this.m32 + mat.m32;
+		result.m33 = this.m33 + mat.m33;
+		result.m34 = this.m34 + mat.m34;
 
-		result.Tx = this.Tx + mat.Tx;
-		result.Ty = this.Ty + mat.Ty;
-		result.Tz = this.Tz + mat.Tz;
-		result.Tw = this.Tw + mat.Tw;
+		result.m41 = this.m41 + mat.m41;
+		result.m42 = this.m42 + mat.m42;
+		result.m43 = this.m43 + mat.m43;
+		result.m44 = this.m44 + mat.m44;
                 
         return result;
     }
@@ -492,25 +447,25 @@ public final class Matrix {
     public Matrix substract(Matrix mat) {
 		Matrix result = new Matrix();
 
-		result.Xx = this.Xx - mat.Xx;
-		result.Xy = this.Xy - mat.Xy;
-		result.Xz = this.Xz - mat.Xz;
-		result.Xw = this.Xw - mat.Xw;
+		result.m11 = this.m11 - mat.m11;
+		result.m12 = this.m12 - mat.m12;
+		result.m13 = this.m13 - mat.m13;
+		result.m14 = this.m14 - mat.m14;
 
-		result.Yx = this.Yx - mat.Yx;
-		result.Yy = this.Yy - mat.Yy;
-		result.Yz = this.Yz - mat.Yz;
-		result.Yw = this.Yw - mat.Yw;
+		result.m21 = this.m21 - mat.m21;
+		result.m22 = this.m22 - mat.m22;
+		result.m23 = this.m23 - mat.m23;
+		result.m24 = this.m24 - mat.m24;
 
-		result.Zx = this.Zx - mat.Zx;
-		result.Zy = this.Zy - mat.Zy;
-		result.Zz = this.Zz - mat.Zz;
-		result.Zw = this.Zw - mat.Zw;
+		result.m31 = this.m31 - mat.m31;
+		result.m32 = this.m32 - mat.m32;
+		result.m33 = this.m33 - mat.m33;
+		result.m34 = this.m34 - mat.m34;
 
-		result.Tx = this.Tx - mat.Tx;
-		result.Ty = this.Ty - mat.Ty;
-		result.Tz = this.Tz - mat.Tz;
-		result.Tw = this.Tw - mat.Tw;
+		result.m41 = this.m41 - mat.m41;
+		result.m42 = this.m42 - mat.m42;
+		result.m43 = this.m43 - mat.m43;
+		result.m44 = this.m44 - mat.m44;
                 
         return result;
     }
@@ -518,25 +473,25 @@ public final class Matrix {
     public Matrix multiply(Matrix mat) {
         Matrix result = new Matrix();
 
-		result.Xx = this.Xx * mat.Xx + this.Xy * mat.Yx + this.Xz * mat.Zx + this.Xw * mat.Tx;
-		result.Xy = this.Xx * mat.Xy + this.Xy * mat.Yy + this.Xz * mat.Zy + this.Xw * mat.Ty;
-		result.Xz = this.Xx * mat.Xz + this.Xy * mat.Yz + this.Xz * mat.Zz + this.Xw * mat.Tz;
-		result.Xw = this.Xx * mat.Xw + this.Xy * mat.Yw + this.Xz * mat.Zw + this.Xw * mat.Tw;
+		result.m11 = this.m11 * mat.m11 + this.m12 * mat.m21 + this.m13 * mat.m31 + this.m14 * mat.m41;
+		result.m12 = this.m11 * mat.m12 + this.m12 * mat.m22 + this.m13 * mat.m32 + this.m14 * mat.m42;
+		result.m13 = this.m11 * mat.m13 + this.m12 * mat.m23 + this.m13 * mat.m33 + this.m14 * mat.m43;
+		result.m14 = this.m11 * mat.m14 + this.m12 * mat.m24 + this.m13 * mat.m34 + this.m14 * mat.m44;
 
-		result.Yx = this.Yx * mat.Xx + this.Yy * mat.Yx + this.Yz * mat.Zx + this.Yw * mat.Tx;
-		result.Yy = this.Yx * mat.Xy + this.Yy * mat.Yy + this.Yz * mat.Zy + this.Yw * mat.Ty;
-		result.Yz = this.Yx * mat.Xz + this.Yy * mat.Yz + this.Yz * mat.Zz + this.Yw * mat.Tz;
-		result.Yw = this.Yx * mat.Xw + this.Yy * mat.Yw + this.Yz * mat.Zw + this.Yw * mat.Tw;
+		result.m21 = this.m21 * mat.m11 + this.m22 * mat.m21 + this.m23 * mat.m31 + this.m24 * mat.m41;
+		result.m22 = this.m21 * mat.m12 + this.m22 * mat.m22 + this.m23 * mat.m32 + this.m24 * mat.m42;
+		result.m23 = this.m21 * mat.m13 + this.m22 * mat.m23 + this.m23 * mat.m33 + this.m24 * mat.m43;
+		result.m24 = this.m21 * mat.m14 + this.m22 * mat.m24 + this.m23 * mat.m34 + this.m24 * mat.m44;
 
-		result.Zx = this.Zx * mat.Xx + this.Zy * mat.Yx + this.Zz * mat.Zx + this.Zw * mat.Tx;
-		result.Zy = this.Zx * mat.Xy + this.Zy * mat.Yy + this.Zz * mat.Zy + this.Zw * mat.Ty;
-		result.Zz = this.Zx * mat.Xz + this.Zy * mat.Yz + this.Zz * mat.Zz + this.Zw * mat.Tz;
-		result.Zw = this.Zx * mat.Xw + this.Zy * mat.Yw + this.Zz * mat.Zw + this.Zw * mat.Tw;
+		result.m31 = this.m31 * mat.m11 + this.m32 * mat.m21 + this.m33 * mat.m31 + this.m34 * mat.m41;
+		result.m32 = this.m31 * mat.m12 + this.m32 * mat.m22 + this.m33 * mat.m32 + this.m34 * mat.m42;
+		result.m33 = this.m31 * mat.m13 + this.m32 * mat.m23 + this.m33 * mat.m33 + this.m34 * mat.m43;
+		result.m34 = this.m31 * mat.m14 + this.m32 * mat.m24 + this.m33 * mat.m34 + this.m34 * mat.m44;
 
-		result.Tx = this.Tx * mat.Xx + this.Ty * mat.Yx + this.Tz * mat.Zx + this.Tw * mat.Tx;
-		result.Ty = this.Tx * mat.Xy + this.Ty * mat.Yy + this.Tz * mat.Zy + this.Tw * mat.Ty;
-		result.Tz = this.Tx * mat.Xz + this.Ty * mat.Yz + this.Tz * mat.Zz + this.Tw * mat.Tz;
-		result.Tw = this.Tx * mat.Xw + this.Ty * mat.Yw + this.Tz * mat.Zw + this.Tw * mat.Tw;
+		result.m41 = this.m41 * mat.m11 + this.m42 * mat.m21 + this.m43 * mat.m31 + this.m44 * mat.m41;
+		result.m42 = this.m41 * mat.m12 + this.m42 * mat.m22 + this.m43 * mat.m32 + this.m44 * mat.m42;
+		result.m43 = this.m41 * mat.m13 + this.m42 * mat.m23 + this.m43 * mat.m33 + this.m44 * mat.m43;
+		result.m44 = this.m41 * mat.m14 + this.m42 * mat.m24 + this.m43 * mat.m34 + this.m44 * mat.m44;
 
 		return result;
     }
@@ -553,10 +508,10 @@ public final class Matrix {
 		Vector result = new Vector();
 		float x, y, z, w;
 
-		x = vec.x * this.Xx + vec.y * this.Yx + vec.z * this.Zx + this.Tx;
-		y = vec.x * this.Xy + vec.y * this.Yy + vec.z * this.Zy + this.Ty;
-		z = vec.x * this.Xz + vec.y * this.Yz + vec.z * this.Zz + this.Tz;
-		w = vec.x * this.Xw + vec.y * this.Yw + vec.z * this.Zw + this.Tw;
+		x = vec.x * this.m11 + vec.y * this.m21 + vec.z * this.m31 + this.m41;
+		y = vec.x * this.m12 + vec.y * this.m22 + vec.z * this.m32 + this.m42;
+		z = vec.x * this.m13 + vec.y * this.m23 + vec.z * this.m33 + this.m43;
+		w = vec.x * this.m14 + vec.y * this.m24 + vec.z * this.m34 + this.m44;
 
 		result.x = x / w;
 		result.y = y / w;
@@ -569,9 +524,9 @@ public final class Matrix {
 		Vector result = new Vector();
 		float x, y, z;
 
-		x = vec.x * this.Xx + vec.y * this.Yx + vec.z * this.Zx;
-		y = vec.x * this.Xy + vec.y * this.Yy + vec.z * this.Zy;
-		z = vec.x * this.Xz + vec.y * this.Yz + vec.z * this.Zz;
+		x = vec.x * this.m11 + vec.y * this.m21 + vec.z * this.m31;
+		y = vec.x * this.m12 + vec.y * this.m22 + vec.z * this.m32;
+		z = vec.x * this.m13 + vec.y * this.m23 + vec.z * this.m33;
 
 		result.x = x;
 		result.y = y;
@@ -584,25 +539,25 @@ public final class Matrix {
 		float cos = MathUtil.cos(angleInRadians);
 		float sin = MathUtil.sin(angleInRadians);
 
-		this.Xx = 1.0f;
-		this.Xy = 0.0f;
-		this.Xz = 0.0f;
-		this.Xw = 0.0f;
+		this.m11 = 1.0f;
+		this.m12 = 0.0f;
+		this.m13 = 0.0f;
+		this.m14 = 0.0f;
 
-		this.Yx = 0.0f;
-		this.Yy = cos;
-		this.Yz = -sin;
-		this.Yw = 0.0f;
+		this.m21 = 0.0f;
+		this.m22 = cos;
+		this.m23 = -sin;
+		this.m24 = 0.0f;
 
-		this.Zx = 0.0f;
-		this.Zy = sin;
-		this.Zz = cos;
-		this.Zw = 0.0f;
+		this.m31 = 0.0f;
+		this.m32 = sin;
+		this.m33 = cos;
+		this.m34 = 0.0f;
 
-		this.Tx = 0.0f;
-		this.Ty = 0.0f;
-		this.Tz = 0.0f;
-		this.Tw = 1.0f;
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
 		return this;
     }
     
@@ -610,25 +565,25 @@ public final class Matrix {
 		float cos = MathUtil.cos(angleInRadians);
 		float sin = MathUtil.sin(angleInRadians);
 
-		this.Xx = cos;
-		this.Xy = 0.0f;
-		this.Xz = sin;
-		this.Xw = 0.0f;
+		this.m11 = cos;
+		this.m12 = 0.0f;
+		this.m13 = sin;
+		this.m14 = 0.0f;
 
-		this.Yx = 0.0f;
-		this.Yy = 1.0f;
-		this.Yz = 0.0f;
-		this.Yw = 0.0f;
+		this.m21 = 0.0f;
+		this.m22 = 1.0f;
+		this.m23 = 0.0f;
+		this.m24 = 0.0f;
 
-		this.Zx = -sin;
-		this.Zy = 0.0f;
-		this.Zz = cos;
-		this.Zw = 0.0f;
+		this.m31 = -sin;
+		this.m32 = 0.0f;
+		this.m33 = cos;
+		this.m34 = 0.0f;
 
-		this.Tx = 0.0f;
-		this.Ty = 0.0f;
-		this.Tz = 0.0f;
-		this.Tw = 1.0f;
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
 		return this;
     }
     
@@ -636,25 +591,25 @@ public final class Matrix {
 		float cos = MathUtil.cos(angleInRadians);
 		float sin = MathUtil.sin(angleInRadians);
 
-		this.Xx = cos;
-		this.Xy = -sin;
-		this.Xz = 0.0f;
-		this.Xw = 0.0f;
+		this.m11 = cos;
+		this.m12 = -sin;
+		this.m13 = 0.0f;
+		this.m14 = 0.0f;
 
-		this.Yx = sin;
-		this.Yy = cos;
-		this.Yz = 0.0f;
-		this.Yw = 0.0f;
+		this.m21 = sin;
+		this.m22 = cos;
+		this.m23 = 0.0f;
+		this.m24 = 0.0f;
 
-		this.Zx = 0.0f;
-		this.Zy = 0.0f;
-		this.Zz = 1.0f;
-		this.Zw = 0.0f;
+		this.m31 = 0.0f;
+		this.m32 = 0.0f;
+		this.m33 = 1.0f;
+		this.m34 = 0.0f;
 
-		this.Tx = 0.0f;
-		this.Ty = 0.0f;
-		this.Tz = 0.0f;
-		this.Tw = 1.0f;
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
 		return this;
     }
     
@@ -665,25 +620,25 @@ public final class Matrix {
 
 		Vector normalizedAxis = axis.normalize();
 
-		this.Xx = (normalizedAxis.x * normalizedAxis.x) * factor + cos;
-		this.Xy = (normalizedAxis.x * normalizedAxis.y) * factor + (normalizedAxis.z * sin);
-		this.Xz = (normalizedAxis.x * normalizedAxis.z) * factor - (normalizedAxis.y * sin);
-		this.Xw = 0.0f;
+		this.m11 = (normalizedAxis.x * normalizedAxis.x) * factor + cos;
+		this.m12 = (normalizedAxis.x * normalizedAxis.y) * factor + (normalizedAxis.z * sin);
+		this.m13 = (normalizedAxis.x * normalizedAxis.z) * factor - (normalizedAxis.y * sin);
+		this.m14 = 0.0f;
 
-		this.Yx = (normalizedAxis.y * normalizedAxis.x) * factor - (normalizedAxis.z * sin);
-		this.Yy = (normalizedAxis.y * normalizedAxis.y) * factor + cos;
-		this.Yz = (normalizedAxis.y * normalizedAxis.z) * factor + (normalizedAxis.x * sin);
-		this.Yw = 0.0f;
+		this.m21 = (normalizedAxis.y * normalizedAxis.x) * factor - (normalizedAxis.z * sin);
+		this.m22 = (normalizedAxis.y * normalizedAxis.y) * factor + cos;
+		this.m23 = (normalizedAxis.y * normalizedAxis.z) * factor + (normalizedAxis.x * sin);
+		this.m24 = 0.0f;
 
-		this.Zx = (normalizedAxis.z * normalizedAxis.x) * factor + (normalizedAxis.y * sin);
-		this.Zy = (normalizedAxis.z * normalizedAxis.y) * factor - (normalizedAxis.x * sin);
-		this.Zz = (normalizedAxis.z * normalizedAxis.z) * factor + cos;
-		this.Zw = 0.0f;
+		this.m31 = (normalizedAxis.z * normalizedAxis.x) * factor + (normalizedAxis.y * sin);
+		this.m32 = (normalizedAxis.z * normalizedAxis.y) * factor - (normalizedAxis.x * sin);
+		this.m33 = (normalizedAxis.z * normalizedAxis.z) * factor + cos;
+		this.m34 = 0.0f;
 
-		this.Tx = 0.0f;
-		this.Ty = 0.0f;
-		this.Tz = 0.0f;
-		this.Tw = 1.0f;
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
 		return this;
     }
     
@@ -704,42 +659,42 @@ public final class Matrix {
 		final float sinXsinY = sinX * sinY;
 		final float cosXsinY = cosX * sinY;
 
-		Xx = cosY * cosZ;
-		Yx = cosY * sinZ;
-		Zx = -sinY;
-		Tx = 0f;
+		m11 = cosY * cosZ;
+		m21 = cosY * sinZ;
+		m31 = -sinY;
+		m41 = 0f;
 
-		Xy = sinXsinY * cosZ - cosX * sinZ;
-		Yy = sinXsinY * sinZ + cosX * cosZ;
-		Zy = sinX * cosY;
-		Ty = 0f;
+		m12 = sinXsinY * cosZ - cosX * sinZ;
+		m22 = sinXsinY * sinZ + cosX * cosZ;
+		m32 = sinX * cosY;
+		m42 = 0f;
 
-		Xz = cosXsinY * cosZ + sinX * sinZ;
-		Yz = cosXsinY * sinZ - sinX * cosZ;
-		Zz = cosX * cosY;
-		Tz = 0f;
+		m13 = cosXsinY * cosZ + sinX * sinZ;
+		m23 = cosXsinY * sinZ - sinX * cosZ;
+		m33 = cosX * cosY;
+		m43 = 0f;
 
-		Xw = 0f;
-		Yw = 0f;
-		Zw = 0f;
-		Tw = 1f;
+		m14 = 0f;
+		m24 = 0f;
+		m34 = 0f;
+		m44 = 1f;
 
 		return this;
 	}
     
     public Matrix setTranslation(float dx, float dy, float dz) {
     	this.identity();
-    	this.Tx = dx;
-    	this.Ty = dy;
-    	this.Tz = dz;
+    	this.m41 = dx;
+    	this.m42 = dy;
+    	this.m43 = dz;
     	return this;
     }
     
     public Matrix setScale(float sx, float sy, float sz) {
         this.identity();
-        this.Xx = sx;
-        this.Yy = sy;
-        this.Zz = sz;
+        this.m11 = sx;
+        this.m22 = sy;
+        this.m33 = sz;
         return this;
     }
     
@@ -772,25 +727,25 @@ public final class Matrix {
 		float scalingZ = scaling.z;
 		
 		// Apply rotation and scale simultaneously, simply adding the translation.
-		Xx = (1f - (yy + zz)) * scalingX;
-		Yx = (xy + wz) * scalingX;
-		Zx = (xz - wy) * scalingX;
-		Tx = translation.x;
+		m11 = (1f - (yy + zz)) * scalingX;
+		m21 = (xy + wz) * scalingX;
+		m31 = (xz - wy) * scalingX;
+		m41 = translation.x;
 
-		Xy = (xy - wz) * scalingY;
-		Yy = (1f - (xx + zz)) * scalingY;
-		Zy = (yz + wx) * scalingY;
-		Ty = translation.y;
+		m12 = (xy - wz) * scalingY;
+		m22 = (1f - (xx + zz)) * scalingY;
+		m32 = (yz + wx) * scalingY;
+		m42 = translation.y;
 
-		Xz = (xz + wy) * scalingZ;
-		Yz = (yz - wx) * scalingZ;
-		Zz = (1f - (xx + yy)) * scalingZ;
-		Tz = translation.z;
+		m13 = (xz + wy) * scalingZ;
+		m23 = (yz - wx) * scalingZ;
+		m33 = (1f - (xx + yy)) * scalingZ;
+		m43 = translation.z;
 
-		Xw = 0f;
-		Yw = 0f;
-		Zw = 0f;
-		Tw = 1f;
+		m14 = 0f;
+		m24 = 0f;
+		m34 = 0f;
+		m44 = 1f;
 
 		return this;
 	}
@@ -806,20 +761,20 @@ public final class Matrix {
 
 		Vector yaxis = zaxis.crossProduct(xaxis);
 
-		this.Xx = xaxis.x;
-		this.Xy = xaxis.y;
-		this.Xz = xaxis.z;
-		this.Xw = -1 * xaxis.dotProduct(eye);
+		this.m11 = xaxis.x;
+		this.m12 = xaxis.y;
+		this.m13 = xaxis.z;
+		this.m14 = -1 * xaxis.dotProduct(eye);
 
-		this.Yx = yaxis.x;
-		this.Yy = yaxis.y;
-		this.Yz = yaxis.z;
-		this.Yw = -1 * yaxis.dotProduct(eye);
+		this.m21 = yaxis.x;
+		this.m22 = yaxis.y;
+		this.m23 = yaxis.z;
+		this.m24 = -1 * yaxis.dotProduct(eye);
 
-		this.Zx = zaxis.x;
-		this.Zy = zaxis.y;
-		this.Zz = zaxis.z;
-		this.Zw = -1 * zaxis.dotProduct(eye);
+		this.m31 = zaxis.x;
+		this.m32 = zaxis.y;
+		this.m33 = zaxis.z;
+		this.m34 = -1 * zaxis.dotProduct(eye);
 		return this;
     }
     
@@ -828,28 +783,22 @@ public final class Matrix {
 
 		float aspectRatio = width / height;
 
-		this.Xx = 1 / (aspectRatio * MathUtil.tan(angleInRadians / 2));
-		this.Yy = 1 / MathUtil.tan(angleInRadians / 2);
-		this.Zz = (-near - far) / (near - far);
-		this.Zw = 1.0f;
-		this.Tz = 2 * near * far / (near - far);
+		this.m11 = 1 / (aspectRatio * MathUtil.tan(angleInRadians / 2));
+		this.m22 = 1 / MathUtil.tan(angleInRadians / 2);
+		this.m33 = (-near - far) / (near - far);
+		this.m34 = 1.0f;
+		this.m43 = 2 * near * far / (near - far);
 		return this;
     }
     
     public Matrix buildOrtographicMatrix(float width, float height, float near, float far) {
         this.zero();
 
-		this.Xx = 2 / width;
-		this.Yy = 2 / height;
-		this.Zz = 1 / (far - near);
-		this.Tz = -near / (far - near);
-		this.Tw = 1.0f;
+		this.m11 = 2 / width;
+		this.m22 = 2 / height;
+		this.m33 = 1 / (far - near);
+		this.m43 = -near / (far - near);
+		this.m44 = 1.0f;
 		return this;
-    }
-    
-    public float[] toArray() {
-//    	float[] array = new float[] {Xx, Xy, Xz, Xw, Yx, Yy, Yz, Yw, Zx, Zy, Zz, Zw, Tx, Ty, Tz, Tw};
-    	float[] array = new float[] {Xx, Yx, Zx, Tx, Xy, Yy, Zy, Ty, Xz, Yz, Zz, Tz, Xw, Yw, Zw, Tw};
-    	return array;
     }
 }

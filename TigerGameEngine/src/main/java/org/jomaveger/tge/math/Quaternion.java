@@ -235,59 +235,59 @@ public final class Quaternion {
 		float yz = this.y * this.z;
 		float xw = this.x * this.w;
 
-		mat.Xx = 1 - 2 * yy - 2 * zz;
-		mat.Xy = 2 * xy + 2 * zw;
-		mat.Xz = 2 * xz - 2 * yw;
+		mat.m11 = 1 - 2 * yy - 2 * zz;
+		mat.m12 = 2 * xy + 2 * zw;
+		mat.m13 = 2 * xz - 2 * yw;
 
-		mat.Yx = 2 * xy - 2 * zw;
-		mat.Yy = 1 - 2 * xx - 2 * zz;
-		mat.Yz = 2 * yz + 2 * xw;
+		mat.m21 = 2 * xy - 2 * zw;
+		mat.m22 = 1 - 2 * xx - 2 * zz;
+		mat.m23 = 2 * yz + 2 * xw;
 
-		mat.Zx = 2 * xz + 2 * yw;
-		mat.Zy = 2 * yz - 2 * xw;
-		mat.Zz = 1 - 2 * xx - 2 * yy;
+		mat.m31 = 2 * xz + 2 * yw;
+		mat.m32 = 2 * yz - 2 * xw;
+		mat.m33 = 1 - 2 * xx - 2 * yy;
 
         return mat;
     }
     
     public void fromMatrix(final Matrix mat) {
-        float trace = mat.Xx + mat.Yy + mat.Zz;
+        float trace = mat.m11 + mat.m22 + mat.m33;
 
 		if (trace > 0) {
 
 			this.w = 0.5f * MathUtil.sqrt(1 + trace);
 			float S = 0.25f / this.w;
 
-			this.x = S * (mat.Yz - mat.Zy);
-			this.y = S * (mat.Zx - mat.Xz);
-			this.z = S * (mat.Xy - mat.Yx);
+			this.x = S * (mat.m23 - mat.m32);
+			this.y = S * (mat.m31 - mat.m13);
+			this.z = S * (mat.m12 - mat.m21);
 
-		} else if (mat.Xx > mat.Yy && mat.Xx > mat.Zz) {
+		} else if (mat.m11 > mat.m22 && mat.m11 > mat.m33) {
 
-			this.x = 0.5f * MathUtil.sqrt(1 + mat.Xx - mat.Yy - mat.Zz);
+			this.x = 0.5f * MathUtil.sqrt(1 + mat.m11 - mat.m22 - mat.m33);
 			float X = 0.25f / this.x;
 
-			this.y = X * (mat.Yx * mat.Xy);
-			this.z = X * (mat.Zx * mat.Xz);
-			this.w = X * (mat.Yz * mat.Zy);
+			this.y = X * (mat.m21 * mat.m12);
+			this.z = X * (mat.m31 * mat.m13);
+			this.w = X * (mat.m23 * mat.m32);
 
-		} else if (mat.Yy > mat.Zz) {
+		} else if (mat.m22 > mat.m33) {
 
-			this.y = 0.5f * MathUtil.sqrt(1 - mat.Xx + mat.Yy - mat.Zz);
+			this.y = 0.5f * MathUtil.sqrt(1 - mat.m11 + mat.m22 - mat.m33);
 			float Y = 0.25f / this.y;
 
-			this.x = Y * (mat.Yx + mat.Xy);
-			this.z = Y * (mat.Zy + mat.Yz);
-			this.w = Y * (mat.Zx - mat.Xz);
+			this.x = Y * (mat.m21 + mat.m12);
+			this.z = Y * (mat.m32 + mat.m23);
+			this.w = Y * (mat.m31 - mat.m13);
 
 		} else {
 
-			this.z = 0.5f * MathUtil.sqrt(1 - mat.Xx - mat.Yy + mat.Zz);
+			this.z = 0.5f * MathUtil.sqrt(1 - mat.m11 - mat.m22 + mat.m33);
 			float Z = 0.25f / this.z;
 
-			this.x = Z * (mat.Zx + mat.Xz);
-			this.y = Z * (mat.Zy + mat.Yz);
-			this.w = Z * (mat.Xy + mat.Yx);
+			this.x = Z * (mat.m31 + mat.m13);
+			this.y = Z * (mat.m32 + mat.m23);
+			this.w = Z * (mat.m12 + mat.m21);
 		}
     }
     

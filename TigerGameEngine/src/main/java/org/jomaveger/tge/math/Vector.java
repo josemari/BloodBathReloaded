@@ -143,7 +143,7 @@ public final class Vector {
         return this.subtract(temp); // E - 2n(E.n)
     }
     
-    //Rodrigues' Rotation Formula, angle in radians
+    //Rodriguez' Rotation Formula, angle in radians
     // resul = v cos + (k x v) sin + k(k.v)(1 - cos)
     public Vector rotate(float angle, Vector axis) {
         float cosine = MathUtil.cos(angle);
