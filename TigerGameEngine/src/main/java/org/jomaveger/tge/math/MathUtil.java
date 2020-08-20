@@ -55,4 +55,8 @@ public interface MathUtil {
     public static float fma(float a, float b, float c) {
     	return a * b + c;
     }
+    
+    public static float invsqrt(float value) {
+        return 1.0f / (float) Math.sqrt(value);
+    }
 }

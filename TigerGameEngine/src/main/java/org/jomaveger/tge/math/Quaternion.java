@@ -2,39 +2,39 @@ package org.jomaveger.tge.math;
 
 public final class Quaternion {
     
-    public float x;
+    public float w;
+	public float x;
     public float y;
     public float z;
-    public float w;
     
     public Quaternion() {
+    	this.w = 1.0f;
         this.x = 0.0f;
         this.y = 0.0f;
         this.z = 0.0f;
-        this.w = 0.0f;
     }
     
-    public Quaternion(float x, float y, float z, float w) {
+    public Quaternion(float w, float x, float y, float z) {
+    	this.w = w;
         this.x = x;
         this.y = y;
         this.z = z;
-        this.w = w;
     }
     
     public Quaternion(final Quaternion quat) {
+    	this.w = quat.w;
         this.x = quat.x;
         this.y = quat.y;
         this.z = quat.z;
-        this.w = quat.w;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 37 * hash + Float.floatToIntBits(this.w);
         hash = 37 * hash + Float.floatToIntBits(this.x);
         hash = 37 * hash + Float.floatToIntBits(this.y);
         hash = 37 * hash + Float.floatToIntBits(this.z);
-        hash = 37 * hash + Float.floatToIntBits(this.w);
         return hash;
     }
 
@@ -50,6 +50,9 @@ public final class Quaternion {
             return false;
         }
         final Quaternion other = (Quaternion) obj;
+        if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
+            return false;
+        }
         if (Float.floatToIntBits(this.x) != Float.floatToIntBits(other.x)) {
             return false;
         }
@@ -59,51 +62,33 @@ public final class Quaternion {
         if (Float.floatToIntBits(this.z) != Float.floatToIntBits(other.z)) {
             return false;
         }
-        if (Float.floatToIntBits(this.w) != Float.floatToIntBits(other.w)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "Quaternion{" + "x=" + x + ", y=" + y + ", z=" + z + ", w=" + w + '}';
+        return "Quaternion{" + "w=" + w + ", x=" + x + ", y=" + y + ", z=" + z + '}';
     }
     
     public Quaternion add(Quaternion quat) {
-        return new Quaternion(this.x + quat.x, this.y + quat.y, this.z + quat.z, this.w + quat.w);
+        return new Quaternion(this.w + quat.w, this.x + quat.x, this.y + quat.y, this.z + quat.z);
     }
     
     public Quaternion substract(Quaternion quat) {
-        return new Quaternion(this.x - quat.x, this.y - quat.y, this.z - quat.z, this.w - quat.w);
-    }
-    
-    public Quaternion multiply(float scalar) {
-        return new Quaternion(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
+        return new Quaternion(this.w - quat.w, this.x - quat.x, this.y - quat.y, this.z - quat.z);
     }
     
     public Quaternion multiply(final Quaternion quat) {	
         Quaternion result = new Quaternion();
 
-	result.w = (this.w * quat.w) - (this.x * quat.x) - (this.y * quat.y) - (this.z * quat.z);
-	result.x = (this.x * quat.w) + (this.w * quat.x) + (this.y * quat.z) - (this.z * quat.y);
-	result.y = (this.y * quat.w) + (this.w * quat.y) + (this.z * quat.x) - (this.x * quat.z);
-	result.z = (this.z * quat.w) + (this.w * quat.z) + (this.x * quat.y) - (this.y * quat.x);
-
-	return result;
-    }
-    
-    public Quaternion multiply(final Vector vec) {
-        Quaternion result = new Quaternion();
-
-        result.w = - (this.x * vec.x) - (this.y * vec.y) - (this.z * vec.z);
-        result.x =   (this.w * vec.x) + (this.y * vec.z) - (this.z * vec.y);
-        result.y =   (this.w * vec.y) + (this.z * vec.x) - (this.x * vec.z);
-        result.z =   (this.w * vec.z) + (this.x * vec.y) - (this.y * vec.x);
+        result.w = (this.w * quat.w) - (this.x * quat.x) - (this.y * quat.y) - (this.z * quat.z);
+        result.x = (this.x * quat.w) + (this.w * quat.x) + (this.y * quat.z) - (this.z * quat.y);
+        result.y = (this.y * quat.w) + (this.w * quat.y) + (this.z * quat.x) - (this.x * quat.z);
+        result.z = (this.z * quat.w) + (this.w * quat.z) + (this.x * quat.y) - (this.y * quat.x);
 
         return result;
     }
-    
+
     public float norm() {
     	return MathUtil.sqrt(this.w * this.w + this.x * this.x + this.y * this.y + this.z * this.z);
     }
@@ -123,7 +108,7 @@ public final class Quaternion {
     }
 
     public Quaternion conjugate() {
-        return new Quaternion(-1 * this.x, -1 * this.y, -1 * this.z, this.w);
+        return new Quaternion(this.w, -1 * this.x, -1 * this.y, -1 * this.z);
     }
     
     public Quaternion inverse() {
@@ -132,14 +117,36 @@ public final class Quaternion {
     	float norm = this.norm();
     	float inverseOfSquaredNorm = 1 / (norm * norm);
 
+    	result.w *= inverseOfSquaredNorm;
     	result.x *= inverseOfSquaredNorm;
     	result.y *= inverseOfSquaredNorm;
     	result.z *= inverseOfSquaredNorm;
-    	result.w *= inverseOfSquaredNorm;
 
     	return result;
     }
     
+    
+    
+    
+    
+    
+    public Quaternion multiply(float scalar) {
+        return new Quaternion(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
+    }
+    
+        
+    public Quaternion multiply(final Vector vec) {
+        Quaternion result = new Quaternion();
+
+        result.w = - (this.x * vec.x) - (this.y * vec.y) - (this.z * vec.z);
+        result.x =   (this.w * vec.x) + (this.y * vec.z) - (this.z * vec.y);
+        result.y =   (this.w * vec.y) + (this.z * vec.x) - (this.x * vec.z);
+        result.z =   (this.w * vec.z) + (this.x * vec.y) - (this.y * vec.x);
+
+        return result;
+    }
+    
+        
     public Quaternion divide(final Quaternion quat) {
     	return this.multiply(quat.inverse());
     }
