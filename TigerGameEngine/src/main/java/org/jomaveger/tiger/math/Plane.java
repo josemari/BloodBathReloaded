@@ -7,40 +7,28 @@ import org.jomaveger.tge.math.Vector;
 public final class Plane {
     
     public Vector normal;
-    public float distance;
+    public Vector point0;
     
     public Plane() {
         this.normal = new Vector(1.0f, 0.0f, 0.0f);
-        this.distance = 0.0f;
+        this.point0 = new Vector();
     }
     
-    public Plane(float a, float b, float c, float d) {
-        this.normal = new Vector(a, b, c);
-        this.distance = d;
-    }
-    
-    public Plane(Vector normal, float d) {
+    public Plane(Vector normal, Vector point0) {
         this.normal = normal;
-        this.distance = d;
+        this.point0 = point0;
     }
     
     public Plane(Plane plane) {
         this.normal = plane.normal;
-        this.distance = plane.distance;
-    }
-    
-    public Plane(Vector pointA, Vector pointB, Vector pointC) {
-        Vector pointBA = pointB.subtract(pointA);
-        Vector pointCA = pointC.subtract(pointA);
-        this.normal = pointBA.crossProduct(pointCA).normalize();
-        this.distance = -1.0f * this.normal.dotProduct(pointA);
+        this.point0 = plane.point0;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 73 * hash + Objects.hashCode(this.normal);
-        hash = 73 * hash + Float.floatToIntBits(this.distance);
+        hash = 73 * hash + Objects.hashCode(this.point0);
         return hash;
     }
 
@@ -56,40 +44,48 @@ public final class Plane {
             return false;
         }
         final Plane other = (Plane) obj;
-        if (Float.floatToIntBits(this.distance) != Float.floatToIntBits(other.distance)) {
+        if (!Objects.equals(this.normal, other.normal)) {
             return false;
         }
-        if (!Objects.equals(this.normal, other.normal)) {
+        if (!Objects.equals(this.point0, other.point0)) {
             return false;
         }
         return true;
     }
     
+    @Override
+    public String toString() {
+        return "Plane{" + "n=" + normal + ", p0=" + point0 + "}";
+    }
+    
     public boolean pointOnPlane(Vector point) {
-        return this.distanceToPlane(point) == 0.0f;
+        return (Float.compare(this.testPoint(point), 0.0f) == 0) ? true : false;
     }
 
     public boolean pointBehindThePlane(Vector point) {
-        return this.distanceToPlane(point) < 0.0f;
+        return this.testPoint(point) < 0.0f;
     }
     
     public boolean pointInFrontOfThePlane(Vector point) {
-        return this.distanceToPlane(point) > 0.0f;
+        return this.testPoint(point) > 0.0f;
     }
     
-    public float distanceToPlane(Vector point) {
-        return this.normal.dotProduct(point) + this.distance;
+    private float testPoint(Vector point) {
+    	return normal.x * (point.x - point0.x)
+    			+ normal.y * (point.y - point0.y)
+    			+ normal.z * (point.z - point0.z);
     }
     
-    public Vector rayIntersection(Vector rayOrigin, Vector rayDirection) {
-        float dotProduct = this.normal.dotProduct(rayDirection);
-        if (dotProduct == 0.0f) {
-            return rayOrigin;   // ray is parallel to plane and will never intersect it
-        }
         
-        float distanceToPlane = this.distanceToPlane(rayOrigin);
-        distanceToPlane /= dotProduct;
-        Vector term = rayDirection.multiply(distanceToPlane);
-        return rayOrigin.subtract(term);
-    }
+//    public Vector rayIntersection(Vector rayOrigin, Vector rayDirection) {
+//        float dotProduct = this.normal.dotProduct(rayDirection);
+//        if (dotProduct == 0.0f) {
+//            return rayOrigin;   // ray is parallel to plane and will never intersect it
+//        }
+//        
+//        float distanceToPlane = this.distanceToPlane(rayOrigin);
+//        distanceToPlane /= dotProduct;
+//        Vector term = rayDirection.multiply(distanceToPlane);
+//        return rayOrigin.subtract(term);
+//    }
 }
