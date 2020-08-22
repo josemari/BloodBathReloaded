@@ -3,8 +3,12 @@ package org.jomaveger.tge.main;
 import org.jomaveger.tge.architecture.GameEngine;
 import org.jomaveger.tge.architecture.IGameEngine;
 import org.jomaveger.tge.main.example1.DummyGameLogic;
+import org.jomaveger.tge.math.IntersectionCondition;
+import org.jomaveger.tge.math.IntersectionResolution;
 import org.jomaveger.tge.math.Matrix;
+import org.jomaveger.tge.math.Plane;
 import org.jomaveger.tge.math.Quaternion;
+import org.jomaveger.tge.math.Vector;
 
 public class Main {
     
@@ -47,14 +51,34 @@ public class Main {
 
     	 */
     	
-    	Quaternion quat = new Quaternion(5, 2, -3, 1);
-    	Quaternion mul = quat.multiply(new Quaternion(2, -1, 6, 8));
-    	System.out.println(mul);
+//    	Quaternion quat = new Quaternion(5, 2, -3, 1);
+//    	Quaternion mul = quat.multiply(new Quaternion(2, -1, 6, 8));
+//    	System.out.println(mul);
     	
     	/**
     	 * El resultado debe ser:
     	 * 
     	 * Quaternion{w=22.0, x=-31.0, y=7.0, z=51.0}
+    	 */
+    	
+    	Vector n = new Vector();
+    	n.x = 0;
+    	n.y = 0;
+    	n.z = 1;
+    	Vector p = new Vector();
+    	Plane plane = new Plane(n, p);
+    	
+    	Vector linePoint = new Vector(); linePoint.x = 5; linePoint.y = 5; linePoint.z = 5;
+    	Vector lineDirection = new Vector(); lineDirection.x = 0; lineDirection.y = 0; lineDirection.z = 10;
+    	
+    	IntersectionResolution lineIntersection = plane.lineIntersection(linePoint, lineDirection);
+    	System.out.println(lineIntersection.condition);
+    	System.out.println(lineIntersection.intersectionPoint);
+    	
+    	/**
+    	 * El resultado debe ser
+    	 * LINE_INTERSECT_OUT_SEGMENT
+Vector{x=5.0, y=5.0, z=0.0}
     	 */
     }
 }

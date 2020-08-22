@@ -12,6 +12,10 @@ public interface MathUtil {
         return (float) Math.toDegrees(radians);
     }
     
+    public static float abs(float value) {
+    	return Math.abs(value);
+    }
+    
     public static float sqrt(float value) {
         return (float) Math.sqrt(value);
     }
