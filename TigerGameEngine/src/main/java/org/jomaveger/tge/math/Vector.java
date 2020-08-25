@@ -63,6 +63,11 @@ public final class Vector {
         return true;
     }
     
+    @Override
+    public String toString() {
+        return "Vector{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
+    }
+    
     public Vector add(Vector vec) {
         return new Vector(this.x + vec.x, this.y + vec.y, this.z + vec.z);
     }
@@ -135,6 +140,14 @@ public final class Vector {
     	return new Vector(0, -z, y);
     }
     
+    public Vector translate(float dx, float dy, float dz) {
+        Vector vec = new Vector();
+        vec.x = this.x + dx;
+        vec.y = this.y + dy;
+        vec.z = this.z + dz;
+        return vec;
+    }
+    
     //R = E - 2n(E.n)
     public Vector reflection(Vector normal) {
         float dotProduct = this.dotProduct(normal); // (E.n)
@@ -201,14 +214,6 @@ public final class Vector {
         return vec;
     }
     
-    public Vector translate(float dx, float dy, float dz) {
-        Vector vec = new Vector();
-        vec.x = this.x + dx;
-        vec.y = this.y + dy;
-        vec.z = this.z + dz;
-        return vec;
-    }
-    
     public Vector scale(float sx, float sy, float sz) {
         Vector vec = new Vector();
         vec.x = this.x * sx;
@@ -217,8 +222,5 @@ public final class Vector {
         return vec;
     }
 
-    @Override
-    public String toString() {
-        return "Vector{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
-    }
+    
 }

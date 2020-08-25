@@ -496,29 +496,41 @@ public final class Matrix {
 		return result;
     }
     
-    public Vector multiply(Vector vec, boolean isPoint) {
-        if (isPoint) {
-            return this.multiplyByPoint(vec);
-        } else {
-            return this.multiplyByVector(vec);
-        }
+    public Matrix setTranslation(float dx, float dy, float dz) {
+    	this.identity();
+    	this.m41 = dx;
+    	this.m42 = dy;
+    	this.m43 = dz;
+    	return this;
     }
-
-    private Vector multiplyByPoint(Vector vec) {
+    
+    public Vector premultiplyByPoint(Vector vec) {
 		Vector result = new Vector();
 		float x, y, z, w;
 
 		x = vec.x * this.m11 + vec.y * this.m21 + vec.z * this.m31 + this.m41;
 		y = vec.x * this.m12 + vec.y * this.m22 + vec.z * this.m32 + this.m42;
 		z = vec.x * this.m13 + vec.y * this.m23 + vec.z * this.m33 + this.m43;
-		w = vec.x * this.m14 + vec.y * this.m24 + vec.z * this.m34 + this.m44;
 
-		result.x = x / w;
-		result.y = y / w;
-		result.z = z / w;
+		result.x = x;
+		result.y = y;
+		result.z = z;
 
 		return result;
     }
+
+    
+    
+    
+    
+    
+//    public Vector multiply(Vector vec, boolean isPoint) {
+//        if (isPoint) {
+//            return this.multiplyByPoint(vec);
+//        } else {
+//            return this.multiplyByVector(vec);
+//        }
+//    }
 
     private Vector multiplyByVector(Vector vec) {
 		Vector result = new Vector();
@@ -682,13 +694,7 @@ public final class Matrix {
 		return this;
 	}
     
-    public Matrix setTranslation(float dx, float dy, float dz) {
-    	this.identity();
-    	this.m41 = dx;
-    	this.m42 = dy;
-    	this.m43 = dz;
-    	return this;
-    }
+    
     
     public Matrix setScale(float sx, float sy, float sz) {
         this.identity();
