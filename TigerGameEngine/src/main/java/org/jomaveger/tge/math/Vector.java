@@ -148,6 +148,43 @@ public final class Vector {
         return vec;
     }
     
+    public Vector scale(float sx, float sy, float sz) {
+        Vector vec = new Vector();
+        vec.x = this.x * sx;
+        vec.y = this.y * sy;
+        vec.z = this.z * sz;
+        return vec;
+    }
+    
+    //angle in radians
+    public Vector rotateAroundAxisX(float angle) {
+        Vector vec = new Vector();
+        vec.x = this.x;
+        vec.y = (this.y * MathUtil.cos(angle)) - (this.z * MathUtil.sin(angle));
+        vec.z = (this.y * MathUtil.sin(angle)) + (this.z * MathUtil.cos(angle));
+        return vec;
+    }
+    
+    //angle in radians
+    public Vector rotateAroundAxisY(float angle) {
+        Vector vec = new Vector();
+        vec.x = (this.x * MathUtil.cos(angle)) + (this.z * MathUtil.sin(angle));
+        vec.y = y;
+        vec.z = -(this.x * MathUtil.sin(angle)) + (this.z * MathUtil.cos(angle));
+        return vec;
+    }
+    
+    //angle in radians
+    public Vector rotateAroundAxisZ(float angle) {
+        Vector vec = new Vector();
+        vec.x = (this.x * MathUtil.cos(angle)) - (this.y * MathUtil.sin(angle));
+        vec.y = (this.x * MathUtil.sin(angle)) + (this.y * MathUtil.cos(angle));
+        vec.z = this.z;
+        return vec;
+    }
+    
+    
+    //////////////////////////////////////////////////////////////////////////////////
     //R = E - 2n(E.n)
     public Vector reflection(Vector normal) {
         float dotProduct = this.dotProduct(normal); // (E.n)
@@ -187,40 +224,9 @@ public final class Vector {
         return new Vector(rotatedVector.x, rotatedVector.y, rotatedVector.z);
     }
     
-    //angle in radians
-    public Vector rotateAroundAxisX(float angle) {
-        Vector vec = new Vector();
-        vec.x = this.x;
-        vec.y = (this.y * MathUtil.cos(angle)) - (this.z * MathUtil.sin(angle));
-        vec.z = (this.y * MathUtil.sin(angle)) + (this.z * MathUtil.cos(angle));
-        return vec;
-    }
     
-    //angle in radians
-    public Vector rotateAroundAxisY(float angle) {
-        Vector vec = new Vector();
-        vec.x = (this.x * MathUtil.cos(angle)) + (this.z * MathUtil.sin(angle));
-        vec.y = y;
-        vec.z = -(this.x * MathUtil.sin(angle)) + (this.z * MathUtil.cos(angle));
-        return vec;
-    }
     
-    //angle in radians
-    public Vector rotateAroundAxisZ(float angle) {
-        Vector vec = new Vector();
-        vec.x = (this.x * MathUtil.cos(angle)) - (this.y * MathUtil.sin(angle));
-        vec.y = (this.x * MathUtil.sin(angle)) + (this.y * MathUtil.cos(angle));
-        vec.z = this.z;
-        return vec;
-    }
     
-    public Vector scale(float sx, float sy, float sz) {
-        Vector vec = new Vector();
-        vec.x = this.x * sx;
-        vec.y = this.y * sy;
-        vec.z = this.z * sz;
-        return vec;
-    }
 
     
 }

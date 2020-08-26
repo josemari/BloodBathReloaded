@@ -504,9 +504,95 @@ public final class Matrix {
     	return this;
     }
     
+    public Matrix setScaling(float sx, float sy, float sz) {
+        this.identity();
+        this.m11 = sx;
+        this.m22 = sy;
+        this.m33 = sz;
+       return this;
+    }
+    
+    public Matrix setRotationByAxisX(float angleInRadians) {
+		float cos = MathUtil.cos(angleInRadians);
+		float sin = MathUtil.sin(angleInRadians);
+
+		this.m11 = 1.0f;
+		this.m12 = 0.0f;
+		this.m13 = 0.0f;
+		this.m14 = 0.0f;
+
+		this.m21 = 0.0f;
+		this.m22 = cos;
+		this.m23 = sin;
+		this.m24 = 0.0f;
+
+		this.m31 = 0.0f;
+		this.m32 = -sin;
+		this.m33 = cos;
+		this.m34 = 0.0f;
+
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
+		return this;
+    }
+    
+    public Matrix setRotationByAxisY(float angleInRadians) {
+		float cos = MathUtil.cos(angleInRadians);
+		float sin = MathUtil.sin(angleInRadians);
+
+		this.m11 = cos;
+		this.m12 = 0.0f;
+		this.m13 = -sin;
+		this.m14 = 0.0f;
+
+		this.m21 = 0.0f;
+		this.m22 = 1.0f;
+		this.m23 = 0.0f;
+		this.m24 = 0.0f;
+
+		this.m31 = sin;
+		this.m32 = 0.0f;
+		this.m33 = cos;
+		this.m34 = 0.0f;
+
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
+		return this;
+    }
+    
+    public Matrix setRotationByAxisZ(float angleInRadians) {
+		float cos = MathUtil.cos(angleInRadians);
+		float sin = MathUtil.sin(angleInRadians);
+
+		this.m11 = cos;
+		this.m12 = sin;
+		this.m13 = 0.0f;
+		this.m14 = 0.0f;
+
+		this.m21 = -sin;
+		this.m22 = cos;
+		this.m23 = 0.0f;
+		this.m24 = 0.0f;
+
+		this.m31 = 0.0f;
+		this.m32 = 0.0f;
+		this.m33 = 1.0f;
+		this.m34 = 0.0f;
+
+		this.m41 = 0.0f;
+		this.m42 = 0.0f;
+		this.m43 = 0.0f;
+		this.m44 = 1.0f;
+		return this;
+    }
+    
     public Vector premultiplyByPoint(Vector vec) {
 		Vector result = new Vector();
-		float x, y, z, w;
+		float x, y, z;
 
 		x = vec.x * this.m11 + vec.y * this.m21 + vec.z * this.m31 + this.m41;
 		y = vec.x * this.m12 + vec.y * this.m22 + vec.z * this.m32 + this.m42;
@@ -547,84 +633,7 @@ public final class Matrix {
 		return result;
     }
     
-    public Matrix setRotationByAxisX(float angleInRadians) {
-		float cos = MathUtil.cos(angleInRadians);
-		float sin = MathUtil.sin(angleInRadians);
-
-		this.m11 = 1.0f;
-		this.m12 = 0.0f;
-		this.m13 = 0.0f;
-		this.m14 = 0.0f;
-
-		this.m21 = 0.0f;
-		this.m22 = cos;
-		this.m23 = -sin;
-		this.m24 = 0.0f;
-
-		this.m31 = 0.0f;
-		this.m32 = sin;
-		this.m33 = cos;
-		this.m34 = 0.0f;
-
-		this.m41 = 0.0f;
-		this.m42 = 0.0f;
-		this.m43 = 0.0f;
-		this.m44 = 1.0f;
-		return this;
-    }
-    
-    public Matrix setRotationByAxisY(float angleInRadians) {
-		float cos = MathUtil.cos(angleInRadians);
-		float sin = MathUtil.sin(angleInRadians);
-
-		this.m11 = cos;
-		this.m12 = 0.0f;
-		this.m13 = sin;
-		this.m14 = 0.0f;
-
-		this.m21 = 0.0f;
-		this.m22 = 1.0f;
-		this.m23 = 0.0f;
-		this.m24 = 0.0f;
-
-		this.m31 = -sin;
-		this.m32 = 0.0f;
-		this.m33 = cos;
-		this.m34 = 0.0f;
-
-		this.m41 = 0.0f;
-		this.m42 = 0.0f;
-		this.m43 = 0.0f;
-		this.m44 = 1.0f;
-		return this;
-    }
-    
-    public Matrix setRotationByAxisZ(float angleInRadians) {
-		float cos = MathUtil.cos(angleInRadians);
-		float sin = MathUtil.sin(angleInRadians);
-
-		this.m11 = cos;
-		this.m12 = -sin;
-		this.m13 = 0.0f;
-		this.m14 = 0.0f;
-
-		this.m21 = sin;
-		this.m22 = cos;
-		this.m23 = 0.0f;
-		this.m24 = 0.0f;
-
-		this.m31 = 0.0f;
-		this.m32 = 0.0f;
-		this.m33 = 1.0f;
-		this.m34 = 0.0f;
-
-		this.m41 = 0.0f;
-		this.m42 = 0.0f;
-		this.m43 = 0.0f;
-		this.m44 = 1.0f;
-		return this;
-    }
-    
+        
     public Matrix setRotationByArbitraryAxis(float angleInRadians, Vector axis) {
 		float cos = MathUtil.cos(angleInRadians);
 		float sin = MathUtil.sin(angleInRadians);
@@ -696,13 +705,7 @@ public final class Matrix {
     
     
     
-    public Matrix setScale(float sx, float sy, float sz) {
-        this.identity();
-        this.m11 = sx;
-        this.m22 = sy;
-        this.m33 = sz;
-        return this;
-    }
+
     
     public Matrix makeTransform(Vector translation, Vector rotation, Vector scaling) {
     	
