@@ -125,6 +125,15 @@ public final class Quaternion {
     	return result;
     }
     
+    //angle in radians, axis is unit vector
+    public void convertToAxisAngleQuaternion(float angle, Vector axis) {
+    	this.w = MathUtil.cos(angle * 0.5f);
+    	this.x = axis.x * MathUtil.sin(angle * 0.5f);
+    	this.y = axis.y * MathUtil.sin(angle * 0.5f);
+    	this.z = axis.z * MathUtil.sin(angle * 0.5f);
+    }
+
+    
     
     
     
@@ -161,19 +170,7 @@ public final class Quaternion {
         return MathUtil.acos(dotProduct / normProduct);
     }
     
-    public void convertToUnitNormQuaternion() {
-    	float angle = MathUtil.toRadians(w);
-		
-    	this.w = MathUtil.cos(angle * 0.5f);
-
-    	Vector vec = new Vector(this.x, this.y, this.z);
-    	vec.normalize();
-		
-    	this.x = vec.x * MathUtil.sin(angle * 0.5f);
-    	this.y = vec.y * MathUtil.sin(angle * 0.5f);
-    	this.z = vec.z * MathUtil.sin(angle * 0.5f);
-    }
-    
+        
     public void fromEulerAngles(float pitch, float yaw, float roll) {
     	float x = MathUtil.toRadians(pitch / 2);
     	float y = MathUtil.toRadians(yaw / 2);

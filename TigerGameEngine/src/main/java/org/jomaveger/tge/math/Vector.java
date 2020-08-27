@@ -183,6 +183,39 @@ public final class Vector {
         return vec;
     }
     
+    //rotate a vector p using a unit quaternion q.
+    //angle in radians, axis is unit vector
+    public Vector rotateByAxisAndAngle(float angle, Vector axis) {
+        Quaternion p = new Quaternion(0.0f, this.x, this.y, this.z);
+
+        Quaternion q = new Quaternion();
+        q.convertToAxisAngleQuaternion(angle, axis);;
+
+        Quaternion qInverse = q.conjugate();
+
+        Quaternion pRotated = q.multiply(p).multiply(qInverse);
+		
+        return new Vector(pRotated.x, pRotated.y, pRotated.z);
+    }
+
+    //Rodriguez' Rotation Formula, angle in radians, axis is unit vector
+    //p' = (p * cosθ) + (n x p) * sinθ + n * (n.p) * (1 - cosθ)
+    public Vector rotateByAxisAndAngleRodrigues(float angle, Vector axis) {
+        float cosine = MathUtil.cos(angle);
+        float sine = MathUtil.sin(angle);
+        
+        Vector term1 = this.multiply(cosine);
+        
+        Vector term2 = axis.crossProduct(this).multiply(sine);
+        
+        float dotProduct = this.dotProduct(axis);
+        dotProduct *= (1 - cosine);
+        Vector term3 = axis.multiply(dotProduct);
+        
+        return term1.add(term2).add(term3);
+    }
+    
+
     
     //////////////////////////////////////////////////////////////////////////////////
     //R = E - 2n(E.n)
@@ -192,41 +225,4 @@ public final class Vector {
         Vector temp = normal.multiply(dotProduct); // 2n(E.n)
         return this.subtract(temp); // E - 2n(E.n)
     }
-    
-    //Rodriguez' Rotation Formula, angle in radians
-    // resul = v cos + (k x v) sin + k(k.v)(1 - cos)
-    public Vector rotate(float angle, Vector axis) {
-        float cosine = MathUtil.cos(angle);
-        float sine = MathUtil.sin(angle);
-        
-        Vector term1 = this.multiply(cosine);
-        Vector term2 = axis.crossProduct(this).multiply(sine);
-        float dotProduct = this.dotProduct(axis);
-        dotProduct *= (1 - cosine);
-        Vector term3 = axis.multiply(dotProduct);
-        
-        return term1.add(term2).add(term3);
-    }
-    
-    //rotate a vector p using a unit quaternion q.
-    public Vector rotateByAxisAndAngle(float angle, Vector axis) {
-        Quaternion p = new Quaternion(this.x, this.y, this.z, 0.0f);
-
-        axis.normalize();
-
-        Quaternion q = new Quaternion(axis.x, axis.y, axis.z, angle);
-        q.convertToUnitNormQuaternion();
-
-        Quaternion qInverse = q.inverse();
-
-        Quaternion rotatedVector = q.multiply(p).multiply(qInverse);
-		
-        return new Vector(rotatedVector.x, rotatedVector.y, rotatedVector.z);
-    }
-    
-    
-    
-    
-
-    
 }
