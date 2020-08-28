@@ -189,7 +189,7 @@ public final class Vector {
         Quaternion p = new Quaternion(0.0f, this.x, this.y, this.z);
 
         Quaternion q = new Quaternion();
-        q.convertToAxisAngleQuaternion(angle, axis);;
+        q.convertToAxisAngleQuaternion(angle, axis);
 
         Quaternion qInverse = q.conjugate();
 
@@ -213,6 +213,20 @@ public final class Vector {
         Vector term3 = axis.multiply(dotProduct);
         
         return term1.add(term2).add(term3);
+    }
+    
+    //angles in radians
+    public Vector rotateByEulerAngles(float thetaZ, float thetaY, float thetaX) {
+    	Quaternion p = new Quaternion(0.0f, this.x, this.y, this.z);
+
+        Quaternion q = new Quaternion();
+        q.fromEulerAngles(thetaZ, thetaY, thetaX);
+
+        Quaternion qInverse = q.conjugate();
+
+        Quaternion pRotated = q.multiply(p).multiply(qInverse);
+		
+        return new Vector(pRotated.x, pRotated.y, pRotated.z);
     }
     
 

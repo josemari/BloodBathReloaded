@@ -133,11 +133,29 @@ public final class Quaternion {
     	this.z = axis.z * MathUtil.sin(angle * 0.5f);
     }
 
+    //angles in radians
+    public void fromEulerAngles(float thetaZ, float thetaY, float thetaX) {
+    	float cosx = MathUtil.cos(thetaX * 0.5f);
+    	float sinx = MathUtil.sin(thetaX * 0.5f);
+
+    	float cosy = MathUtil.cos(thetaY * 0.5f);
+    	float siny = MathUtil.sin(thetaY * 0.5f);
+
+    	float cosz = MathUtil.cos(thetaZ * 0.5f);
+    	float sinz = MathUtil.sin(thetaZ * 0.5f);
+
+    	this.w = cosz * cosy * cosx + sinz * siny * sinx;
+    	this.x = cosz * cosy * sinx - sinz * siny * cosx;
+    	this.y = cosz * siny * cosx + sinz * cosy * sinx;
+    	this.z = sinz * cosy * cosx - cosz * siny * sinx;
+    }
+
     
     
     
     
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////
     
     public Quaternion multiply(float scalar) {
         return new Quaternion(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
@@ -171,26 +189,7 @@ public final class Quaternion {
     }
     
         
-    public void fromEulerAngles(float pitch, float yaw, float roll) {
-    	float x = MathUtil.toRadians(pitch / 2);
-    	float y = MathUtil.toRadians(yaw / 2);
-    	float z = MathUtil.toRadians(roll / 2);
-
-    	float cosx = MathUtil.cos(x);
-    	float sinx = MathUtil.sin(x);
-
-    	float cosy = MathUtil.cos(y);
-    	float siny = MathUtil.sin(y);
-
-    	float cosz = MathUtil.cos(z);
-    	float sinz = MathUtil.sin(z);
-
-    	this.w = cosz * cosy * cosx + sinz * siny * sinx;
-    	this.x = cosz * cosy * sinx - sinz * siny * cosx;
-    	this.y = cosz * siny * cosx + sinz * cosy * sinx;
-    	this.z = sinz * cosy * cosx - cosz * siny * sinx;
-    }
-    
+        
     public Vector toEulerAngles() {
     	float x = 0.0f;
     	float y = 0.0f;
