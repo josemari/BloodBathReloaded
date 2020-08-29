@@ -150,16 +150,53 @@ public final class Quaternion {
     	this.z = sinz * cosy * cosx - cosz * siny * sinx;
     }
 
+    public Quaternion multiply(float scalar) {
+        return new Quaternion(this.w * scalar, this.x * scalar, this.y * scalar, this.z * scalar);
+    }
     
-    
-    
-    
+    public float dotProduct(final Quaternion quat) {
+    	return (this.w * quat.w) + (this.x * quat.x) + (this.y * quat.y) + (this.z * quat.z);
+    }
+
+    //q0 and q1 are unit quaternions, t from 0.0 to 1.0
+    public static Quaternion slerp(Quaternion q0, Quaternion q1, float t) {
+    	float w, x, y, z;
+    	
+    	float cosOmega = q0.dotProduct(q1); 
+    	
+    	if (cosOmega < 0.0f) {
+    		q1 = q1.multiply(-1.0f); 
+    		cosOmega = -1 * cosOmega;
+    	} 
+    	
+    	float k0, k1; 
+    	
+    	if (cosOmega > 0.9999f) { 
+    		k0 = 1.0f - t;
+    		k1 = t ;
+    	} else { 
+    		
+    		float sinOmega = MathUtil.sqrt(1.0f - (cosOmega * cosOmega)); 
+    		
+    		float omega = MathUtil.atan(sinOmega, cosOmega);
+    		
+    		float oneOverSinOmega = 1.0f / sinOmega;
+
+    		k0 = MathUtil.sin((1.0f - t) * omega) * oneOverSinOmega; 
+    		k1 = MathUtil.sin(t * omega) * oneOverSinOmega;
+    	}
+    	
+    	w = q0.w * k0 + q1.w * k1; 
+    	x = q0.x * k0 + q1.x * k1; 
+    	y = q0.y * k0 + q1.y * k1; 
+    	z = q0.z * k0 + q1.z * k1; 
+    	
+        return new Quaternion(w, x, y, z);
+    }
     
     /////////////////////////////////////////////////////////////////////////////////////////////////
     
-    public Quaternion multiply(float scalar) {
-        return new Quaternion(this.x * scalar, this.y * scalar, this.z * scalar, this.w * scalar);
-    }
+    
     
         
     public Quaternion multiply(final Vector vec) {
@@ -178,10 +215,7 @@ public final class Quaternion {
     	return this.multiply(quat.inverse());
     }
     
-    public float dotProduct(final Quaternion quat) {
-    	return (this.x * quat.x) + (this.y * quat.y) + (this.z * quat.z) + (this.w * quat.w);
-    }
-
+    
     public float angle(final Quaternion quat) {
         float dotProduct = this.dotProduct(quat);
         float normProduct = this.norm() * quat.norm();
@@ -292,52 +326,5 @@ public final class Quaternion {
 			this.y = Z * (mat.m32 + mat.m23);
 			this.w = Z * (mat.m12 + mat.m21);
 		}
-    }
-    
-    public Quaternion slerp(float amount, Quaternion end) {
-        if (amount < 0.0) {
-            return this;
-        } else if (amount > 1.0) {
-            return end;
-        }
-            
-        float dot = this.dotProduct(end);
-        float x2, y2, z2, w2;
-        
-        if (dot < 0.0) {
-            
-            dot = 0.0f - dot;
-            x2 = 0.0f - end.x;
-            y2 = 0.0f - end.y;
-            z2 = 0.0f - end.z;
-            w2 = 0.0f - end.w;
-        
-        } else {
-            
-            x2 = end.x;
-            y2 = end.y;
-            z2 = end.z;
-            w2 = end.w;
-        }
-
-        float t1, t2;
-        final float EPSILON = 0.0001f;
-        
-        if ((1.0f - dot) > EPSILON) { // standard case (slerp)
-            
-            float angle = MathUtil.acos(dot);
-            float sinAngle = MathUtil.sin(angle);
-            t1 = MathUtil.sin((1.0f - amount) * angle) / sinAngle;
-            t2 = MathUtil.sin(amount * angle) / sinAngle;
-        
-        } else { // just lerp
-            
-            t1 = 1.0f - amount;
-            t2 = amount;
-        
-        }
-
-        return new Quaternion((this.x * t1) + (x2 * t2), (this.y * t1) + (y2 * t2),
-                                (this.z * t1) + (z2 * t2), (this.w * t1) + (w2 * t2));
     }
 }

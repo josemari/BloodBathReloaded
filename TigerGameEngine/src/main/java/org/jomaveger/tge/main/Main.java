@@ -61,24 +61,26 @@ public class Main {
     	 * Quaternion{w=22.0, x=-31.0, y=7.0, z=51.0}
     	 */
     	
-    	Vector n = new Vector();
-    	n.x = 0;
-    	n.y = 0;
-    	n.z = 1;
-    	Vector p = new Vector();
-    	Plane plane = new Plane(n, p);
-    	
-    	Vector linePoint = new Vector(); linePoint.x = 5; linePoint.y = 5; linePoint.z = 5;
-    	Vector lineDirection = new Vector(); lineDirection.x = 0; lineDirection.y = 0; lineDirection.z = 10;
-    	
-    	IntersectionResolution lineIntersection = plane.lineIntersection(linePoint, lineDirection);
-    	System.out.println(lineIntersection.condition);
-    	System.out.println(lineIntersection.intersectionPoint);
+//    	Vector n = new Vector();
+//    	n.x = 0;
+//    	n.y = 0;
+//    	n.z = 1;
+//    	Vector p = new Vector();
+//    	Plane plane = new Plane(n, p);
+//    	
+//    	Vector linePoint = new Vector(); linePoint.x = 5; linePoint.y = 5; linePoint.z = 5;
+//    	Vector lineDirection = new Vector(); lineDirection.x = 0; lineDirection.y = 0; lineDirection.z = 10;
+//    	
+//    	IntersectionResolution lineIntersection = plane.lineIntersection(linePoint, lineDirection);
+//    	System.out.println(lineIntersection.condition);
+//    	System.out.println(lineIntersection.intersectionPoint);
     	
     	/**
     	 * El resultado debe ser
     	 * LINE_INTERSECT_OUT_SEGMENT
 Vector{x=5.0, y=5.0, z=0.0}
     	 */
+    	
+    	Quaternion.slerp(new Quaternion(0, 1, 2, 3), new Quaternion(0, -4, -5, -6), 0.3f);
     }
 }
