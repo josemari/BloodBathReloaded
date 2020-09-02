@@ -2,7 +2,6 @@ package org.jomaveger.tiger.architecture;
 
 import org.jomaveger.tge.datastructures.IList;
 import org.jomaveger.tge.datastructures.LinkedList;
-import org.jomaveger.tge.graphics.Framebuffer;
 import org.jomaveger.tge.input.KeyInputManager;
 import org.jomaveger.tge.input.MouseInputManager;
 import org.slf4j.Logger;

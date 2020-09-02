@@ -1,4 +1,4 @@
-package org.jomaveger.tge.graphics;
+package org.jomaveger.tiger.architecture;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
