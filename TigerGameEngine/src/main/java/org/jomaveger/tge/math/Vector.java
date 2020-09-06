@@ -229,9 +229,40 @@ public final class Vector {
         return new Vector(pRotated.x, pRotated.y, pRotated.z);
     }
     
-
+    //angles in radians
+    public void addTransform(Vector location, float angleX, float angleZ, float angleY) {
+    	addRotation(angleX, angleZ, angleY);
+    	Vector t = translate(location.x, location.y, location.z);
+    	this.x = t.x;
+    	this.y = t.y;
+    	this.z = t.z;
+    }
     
-    //////////////////////////////////////////////////////////////////////////////////
+    //angles in radians
+    public void substractTransform(Vector location, float angleX, float angleZ, float angleY) {
+    	Vector t = translate(-location.x, -location.y, -location.z);
+    	t.substractRotation(angleX, angleZ, angleY);
+    }
+    
+    public void substractRotation(float angleX, float angleZ, float angleY) {
+    	Vector ry = rotateAroundAxisY(-angleY);
+		Vector ryz = ry.rotateAroundAxisZ(-angleZ);
+		Vector ryzx = ryz.rotateAroundAxisY(-angleX);
+		this.x = ryzx.x;
+    	this.y = ryzx.y;
+    	this.z = ryzx.z;;
+	}
+
+	public void addRotation(float angleX, float angleZ, float angleY) {
+		Vector rx = rotateAroundAxisX(angleX);
+		Vector rxz = rx.rotateAroundAxisZ(angleZ);
+		Vector rxzy = rxz.rotateAroundAxisY(angleY);
+		this.x = rxzy.x;
+    	this.y = rxzy.y;
+    	this.z = rxzy.z;
+	}
+
+	//////////////////////////////////////////////////////////////////////////////////
     //R = E - 2n(E.n)
     public Vector reflection(Vector normal) {
         float dotProduct = this.dotProduct(normal); // (E.n)
