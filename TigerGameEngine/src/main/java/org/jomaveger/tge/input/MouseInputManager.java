@@ -1,7 +1,9 @@
 package org.jomaveger.tge.input;
 
+import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -19,6 +21,11 @@ import org.slf4j.LoggerFactory;
 public final class MouseInputManager implements IDisposable, MouseListener, MouseMotionListener, MouseWheelListener {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MouseInputManager.class);
+
+	public static final Cursor INVISIBLE_CURSOR =
+		Toolkit.getDefaultToolkit().createCustomCursor(
+			Toolkit.getDefaultToolkit().getImage(""),
+	            new Point(0,0), "invisible");
 
 	private static final int BUTTON_COUNT = 3;
 

@@ -157,7 +157,7 @@ public final class Engine implements IEngine {
         }
         fps++;
 
-        this.window.clear();
+//        this.window.clear();
         this.renderer.render();
         this.window.update();
     }

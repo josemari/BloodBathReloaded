@@ -2,7 +2,8 @@ package org.jomaveger.tge.main;
 
 import org.jomaveger.tge.architecture.GameEngine;
 import org.jomaveger.tge.architecture.IGameEngine;
-import org.jomaveger.tge.main.example1.DummyGameLogic;
+import org.jomaveger.tge.main.chapter1.Chapter1Example1;
+import org.jomaveger.tge.main.chapter2.Chapter2Example1;
 import org.jomaveger.tge.math.IntersectionCondition;
 import org.jomaveger.tge.math.IntersectionResolution;
 import org.jomaveger.tge.math.Matrix;
@@ -13,10 +14,11 @@ import org.jomaveger.tge.math.Vector;
 public class Main {
     
     public static void main(String[] args) {
-//    	IGameEngine tiger = new GameEngine("Tiger Game Engine", 640, 480, new DummyGameLogic());
-//    	IGameEngine tiger = new GameEngine("Tiger Game Engine", new DummyGameLogic());
-//        tiger.start();
-    	
+//    	IGameEngine tiger = new GameEngine("Tiger Game Engine", 640, 480, new Chapter2Example1());
+    	IGameEngine tiger = new GameEngine("Tiger Game Engine", new Chapter2Example1());
+        tiger.start();
+//    	new Chapter2Example1().run();
+    	    	
 //    	Matrix mat = new Matrix();
 //    	mat.m11 = 0.0f;
 //    	mat.m12 = 0.0f;

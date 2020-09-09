@@ -78,7 +78,7 @@ public class ViewWindow {
     }
 
     public float convertFromScreenYToViewY(float y) {
-        return -y + bounds.y + bounds.height/2;
+        return -y + bounds.y + bounds.height / 2;
     }
 
     public void project(Vector v) {

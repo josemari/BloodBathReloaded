@@ -24,10 +24,6 @@ public final class GameEngine implements IGameEngine {
 
     private String windowTitle;
 
-    private double lastFps;
-
-    private int fps;
-
     public GameEngine(String windowTitle, int width, int height, IGameLogic gameLogic) {
         this.windowTitle = windowTitle;
         this.window = new ScreenManager(windowTitle, width, height);
@@ -101,9 +97,7 @@ public final class GameEngine implements IGameEngine {
         this.keyInputManager.init();
         this.mouseInputManager.init();
         this.gameLogic.init(this.window);
-        this.lastFps = timer.getTime();
-        this.fps = 0;
-
+        
         LOG.info("Tiger engine initialized successfully!");
     }
 
@@ -139,14 +133,6 @@ public final class GameEngine implements IGameEngine {
     }
 
     private void render() {
-        if (timer.getLastLoopTime() - lastFps > 1) {
-            lastFps = timer.getLastLoopTime();
-            window.setWindowTitle(windowTitle + " - " + fps + " FPS");
-            fps = 0;
-        }
-        fps++;
-
-        this.window.clear();
         this.gameLogic.render(this.window);
         this.window.update();
     }

@@ -1,10 +1,12 @@
 package org.jomaveger.tge.graphics;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.DisplayMode;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import javax.swing.JFrame;
@@ -35,8 +37,6 @@ public class ScreenManager implements IDisposable {
     private KeyInputManager keyInputManager;
 
 	private MouseInputManager mouseInputManager;
-	
-	private Graphics2D graphics;
 
     public ScreenManager(String windowTitle, int width, int height) {
         this.title = windowTitle;
@@ -93,6 +93,7 @@ public class ScreenManager implements IDisposable {
                 LOG.error(ExceptionUtils.getExpandedMessage(ex));
             }
         }
+        frame.createBufferStrategy(2);
     }
 
     private void setWindowedScreen() {
@@ -105,6 +106,7 @@ public class ScreenManager implements IDisposable {
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        frame.createBufferStrategy(2);
     }
 
     public int getWidth() {
@@ -126,27 +128,29 @@ public class ScreenManager implements IDisposable {
     }
 
     public Graphics2D getGraphics() {
-    	BufferStrategy bufferStrategy = getBufferStrategy();
-    	if (graphics != null) {
-    		graphics.dispose();
-    		graphics = null;
-    	}
-        graphics = (Graphics2D) bufferStrategy.getDrawGraphics();
-        return graphics;
+        Window window = screen.getFullScreenWindow();
+        if (window != null) {
+            BufferStrategy strategy = window.getBufferStrategy();
+            return (Graphics2D)strategy.getDrawGraphics();
+        }
+        else {
+        	BufferStrategy strategy = frame.getBufferStrategy();
+        	return (Graphics2D)strategy.getDrawGraphics();
+        }
     }
 
-	private BufferStrategy getBufferStrategy() {
-		BufferStrategy bufferStrategy = frame.getBufferStrategy();
-        if (bufferStrategy == null) {
-            frame.createBufferStrategy(2);
-            bufferStrategy = frame.getBufferStrategy();
-        }
-		return bufferStrategy;
-	}
-
-    public void update() {
-        if (!getBufferStrategy().contentsLost()) {
-        	getBufferStrategy().show();
+	public void update() {
+        Window window = screen.getFullScreenWindow();
+        if (window != null) {
+            BufferStrategy strategy = window.getBufferStrategy();
+            if (!strategy.contentsLost()) {
+                strategy.show();
+            }
+        } else {
+        	BufferStrategy strategy = frame.getBufferStrategy();
+        	if (!strategy.contentsLost()) {
+                strategy.show();
+            }
         }
     }
 
@@ -157,6 +161,10 @@ public class ScreenManager implements IDisposable {
     public void setWindowTitle(String title) {
         frame.setTitle(title);
     }
+    
+    public void setCursor(Cursor cursor) {
+        frame.setCursor(cursor);
+    }
 
     public void addKeyInputManager(KeyInputManager keyInputManager) {
     	this.keyInputManager = keyInputManager;
@@ -165,10 +173,6 @@ public class ScreenManager implements IDisposable {
 
     @Override
     public void dispose() {
-    	if (graphics != null) {
-    		graphics.dispose();
-    		graphics = null;
-    	}
         java.awt.Window window = screen.getFullScreenWindow();
         if (window != null) {
             screen.setFullScreenWindow(null);
@@ -181,11 +185,6 @@ public class ScreenManager implements IDisposable {
 		return this.keyInputManager.keyDown(KeyEvent.VK_ESCAPE);
 	}
 
-	public void clear() {
-		graphics = getGraphics();
-		graphics.clearRect(0, 0, getWidth(), getHeight());
-	}
-
 	public void addMouseInputManager(MouseInputManager mouseInputManager) {
 		this.mouseInputManager = mouseInputManager;
 		frame.addMouseListener(mouseInputManager);
@@ -196,4 +195,16 @@ public class ScreenManager implements IDisposable {
 	public JFrame getWindowComponent() {
 		return frame;
 	}
+	
+	public Window getFullScreenWindow() {
+        return screen.getFullScreenWindow();
+    }
+	
+	public void restoreScreen() {
+        Window window = screen.getFullScreenWindow();
+        if (window != null) {
+            window.dispose();
+        }
+        screen.setFullScreenWindow(null);
+    }
 }

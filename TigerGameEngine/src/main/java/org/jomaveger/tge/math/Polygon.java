@@ -19,20 +19,26 @@ public class Polygon {
 	}
 	
 	public Polygon(List<Vector> vertexList) {
-		this.vertexList = new ArrayList<>();
-		for (Vector v : vertexList) {
-			this.vertexList.add(v);	
-		}
+		this.vertexList = vertexList;
 		this.numVertices = this.vertexList.size();
 		this.color = null;
 	}
 	
 	public Polygon(Polygon p) {
 		this.vertexList = new ArrayList<>();
-		for (Vector v : p.vertexList) {
-			this.vertexList.add(v);	
-		}
-		this.numVertices = this.vertexList.size();
+		this.numVertices = p.vertexList.size();
+		for (int i=0; i<numVertices; i++) {
+            this.vertexList.add(new Vector(p.getVertex(i)));
+        }
+		this.color = p.color;
+	}
+	
+	public void setTo(Polygon p) {
+		this.vertexList.clear();
+		this.numVertices = p.vertexList.size();
+		for (int i=0; i<numVertices; i++) {
+            this.vertexList.add(new Vector(p.getVertex(i)));
+        }
 		this.color = p.color;
 	}
 	
@@ -63,23 +69,37 @@ public class Polygon {
 		}
     }
 	
-	//angles in radians
-    public void addTransform(Vector location, float angleX, float angleZ, float angleY) {
-    	for (Vector v : this.vertexList) {
-			v.addRotation(angleX, angleZ, angleY);	
-		}
-    	for (Vector v : this.vertexList) {
-			v.set(v.translate(location.x, location.y, location.z));	
-		}
+	public void add(Transform tform) {
+        addRotation(tform);
+        add(tform.getLocation());
+    }
+
+    public void subtract(Transform tform) {
+        subtract(tform.getLocation());
+        subtractRotation(tform);
+    }
+
+    public void addRotation(Transform tform) {
+        for (Vector v : vertexList) {
+           v.addRotation(tform);
+        }
+    }
+
+    public void subtractRotation(Transform tform) {
+        for (Vector v : vertexList) {
+           v.subtractRotation(tform);
+        }
     }
     
-    //angles in radians
-    public void substractTransform(Vector location, float angleX, float angleZ, float angleY) {
-    	for (Vector v : this.vertexList) {
-			v.set(v.translate(-location.x, -location.y, -location.z));	
-		}
-    	for (Vector v : this.vertexList) {
-			v.substractRotation(angleX, angleZ, angleY);	
-		}
-    }
+    public void add(Vector u) {
+        for (Vector v : vertexList) {
+            v.sum(u);
+        }
+     }
+
+     public void subtract(Vector u) {
+        for (Vector v : vertexList) {
+            v.minus(u);
+        }
+     }
 }

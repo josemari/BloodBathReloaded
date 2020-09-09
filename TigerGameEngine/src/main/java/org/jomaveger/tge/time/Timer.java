@@ -2,25 +2,29 @@ package org.jomaveger.tge.time;
 
 public final class Timer {
 
-    private double lastLoopTime;
+    private long lastLoopTime;
+    private long startTime;
+    private long currTime;
 
     public void init() {
         lastLoopTime = getTime();
+        startTime = lastLoopTime;
+        currTime = startTime;
     }
 
-    public double getTime() {
-        return System.nanoTime() / 1000_000_000.0;
+    public long getTime() {
+        return System.currentTimeMillis();
     }
 
-    public float getElapsedTime() {
-        double time = getTime();
-        float elapsedTime = (float) (time - lastLoopTime);
+    public long getElapsedTime() {
+        long time = getTime();
+        long elapsedTime = time - currTime;
+        currTime += elapsedTime;
         lastLoopTime = time;
         return elapsedTime;
     }
 
-    public double getLastLoopTime() {
+    public long getLastLoopTime() {
         return lastLoopTime;
     }
-
 }

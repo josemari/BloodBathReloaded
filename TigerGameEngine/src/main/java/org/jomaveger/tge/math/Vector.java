@@ -24,7 +24,7 @@ public final class Vector {
         this.z = vec.z;
     }
     
-    public void set(Vector vec) {
+    public void setTo(Vector vec) {
         this.x = vec.x;
         this.y = vec.y;
         this.z = vec.z;
@@ -68,8 +68,20 @@ public final class Vector {
         return "Vector{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
     }
     
+    public void sum(Vector vec) {
+    	this.x += vec.x;
+    	this.y += vec.y;
+    	this.z += vec.z;
+    }
+    
     public Vector add(Vector vec) {
         return new Vector(this.x + vec.x, this.y + vec.y, this.z + vec.z);
+    }
+    
+    public void minus(Vector vec) {
+    	this.x -= vec.x;
+    	this.y -= vec.y;
+    	this.z -= vec.z;
     }
     
     public Vector subtract(Vector vec) {
@@ -229,45 +241,54 @@ public final class Vector {
         return new Vector(pRotated.x, pRotated.y, pRotated.z);
     }
     
-    //angles in radians
-    public void addTransform(Vector location, float angleX, float angleZ, float angleY) {
-    	addRotation(angleX, angleZ, angleY);
-    	Vector t = translate(location.x, location.y, location.z);
-    	this.x = t.x;
-    	this.y = t.y;
-    	this.z = t.z;
-    }
-    
-    //angles in radians
-    public void substractTransform(Vector location, float angleX, float angleZ, float angleY) {
-    	Vector t = translate(-location.x, -location.y, -location.z);
-    	t.substractRotation(angleX, angleZ, angleY);
-    }
-    
-    public void substractRotation(float angleX, float angleZ, float angleY) {
-    	Vector ry = rotateAroundAxisY(-angleY);
-		Vector ryz = ry.rotateAroundAxisZ(-angleZ);
-		Vector ryzx = ryz.rotateAroundAxisY(-angleX);
-		this.x = ryzx.x;
-    	this.y = ryzx.y;
-    	this.z = ryzx.z;;
+	public void rotateX(float cosAngle, float sinAngle) {
+		float newY = y * cosAngle - z * sinAngle;
+		float newZ = y * sinAngle + z * cosAngle;
+		y = newY;
+		z = newZ;
 	}
 
-	public void addRotation(float angleX, float angleZ, float angleY) {
-		Vector rx = rotateAroundAxisX(angleX);
-		Vector rxz = rx.rotateAroundAxisZ(angleZ);
-		Vector rxzy = rxz.rotateAroundAxisY(angleY);
-		this.x = rxzy.x;
-    	this.y = rxzy.y;
-    	this.z = rxzy.z;
+	public void rotateY(float cosAngle, float sinAngle) {
+		float newX = z * sinAngle + x * cosAngle;
+		float newZ = z * cosAngle - x * sinAngle;
+		x = newX;
+		z = newZ;
 	}
 
-	//////////////////////////////////////////////////////////////////////////////////
-    //R = E - 2n(E.n)
-    public Vector reflection(Vector normal) {
-        float dotProduct = this.dotProduct(normal); // (E.n)
-        dotProduct *= 2.0; // 2(E.n)
-        Vector temp = normal.multiply(dotProduct); // 2n(E.n)
-        return this.subtract(temp); // E - 2n(E.n)
+	public void rotateZ(float cosAngle, float sinAngle) {
+		float newX = x * cosAngle - y * sinAngle;
+		float newY = x * sinAngle + y * cosAngle;
+		x = newX;
+		y = newY;
+	}
+	
+	public void add(Transform tform) {
+
+		// rotate
+		addRotation(tform);
+
+		// translate
+		sum(tform.getLocation());
+	}
+
+	public void subtract(Transform tform) {
+
+		// translate
+		minus(tform.getLocation());
+
+		// rotate
+		subtractRotation(tform);
+	}
+	
+	public void addRotation(Transform tform) {
+        rotateX(tform.getCosAngleX(), tform.getSinAngleX());
+        rotateZ(tform.getCosAngleZ(), tform.getSinAngleZ());
+        rotateY(tform.getCosAngleY(), tform.getSinAngleY());
+    }
+
+    public void subtractRotation(Transform tform) {
+        rotateY(tform.getCosAngleY(), -tform.getSinAngleY());
+        rotateZ(tform.getCosAngleZ(), -tform.getSinAngleZ());
+        rotateX(tform.getCosAngleX(), -tform.getSinAngleX());
     }
 }
