@@ -52,6 +52,14 @@ public interface MathUtil {
         return Math.min(a, b);
     }
     
+    public static int max(int a, int b) {
+        return Math.max(a, b);
+    }
+
+    public static int min(int a, int b) {
+        return Math.min(a, b);
+    }
+    
     public static float pow(float base, float exponent) {
         return (float) Math.pow(base, exponent);
     }
@@ -62,5 +70,14 @@ public interface MathUtil {
     
     public static float invsqrt(float value) {
         return 1.0f / (float) Math.sqrt(value);
+    }
+    
+    public static int ceil(float f) {
+        if (f > 0) {
+            return (int)f + 1;
+        }
+        else {
+           return (int)f;
+        }
     }
 }

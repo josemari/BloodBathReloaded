@@ -11,19 +11,39 @@ public class Polygon {
 	private List<Vector> vertexList;
 	private int numVertices;
 	private Color color;
+	private Vector normal;
 
 	public Polygon() {
 		this.vertexList = new ArrayList<>();
 		this.numVertices = 0;
 		this.color = null;
+		this.normal = new Vector();
 	}
 	
 	public Polygon(List<Vector> vertexList) {
 		this.vertexList = vertexList;
 		this.numVertices = this.vertexList.size();
 		this.color = null;
+		calcNormal();
 	}
 	
+	public Vector calcNormal() {
+		if (normal == null) {
+            normal = new Vector();
+        }
+		Vector temp1 = new Vector();
+		Vector temp2 = new Vector();
+		Vector temp3;
+        temp1.setTo(this.vertexList.get(2));
+        temp1.minus(this.vertexList.get(1));
+        temp2.setTo(this.vertexList.get(0));
+        temp2.minus(this.vertexList.get(1));
+        temp3 = temp1.crossProduct(temp2);
+        normal = temp3.normalize();
+        return normal;
+		
+	}
+
 	public Polygon(Polygon p) {
 		this.vertexList = new ArrayList<>();
 		this.numVertices = p.vertexList.size();
@@ -31,6 +51,7 @@ public class Polygon {
             this.vertexList.add(new Vector(p.getVertex(i)));
         }
 		this.color = p.color;
+		this.normal = new Vector(p.normal);
 	}
 	
 	public void setTo(Polygon p) {
@@ -40,6 +61,7 @@ public class Polygon {
             this.vertexList.add(new Vector(p.getVertex(i)));
         }
 		this.color = p.color;
+		this.normal.setTo(p.normal);
 	}
 	
 	public void insertVertex(int index, Vector vertex) {
@@ -63,6 +85,25 @@ public class Polygon {
 		this.color = c;
 	}
 	
+	public Vector getNormal() {
+        return normal;
+    }
+	
+	public void setNormal(Vector n) {
+        if (normal == null) {
+            normal = new Vector(n);
+        }
+        else {
+            normal.setTo(n);
+        }
+    }
+	
+	public boolean isFacing(Vector u) {
+		Vector temp1 = new Vector(u);
+        temp1.minus(this.vertexList.get(0));
+        return (normal.dotProduct(temp1) >= 0);
+    }
+	
 	public void project(ViewWindow view) {
 		for (Vector v : this.vertexList) {
 			view.project(v);	
@@ -83,12 +124,14 @@ public class Polygon {
         for (Vector v : vertexList) {
            v.addRotation(tform);
         }
+        normal.addRotation(tform);
     }
 
     public void subtractRotation(Transform tform) {
         for (Vector v : vertexList) {
            v.subtractRotation(tform);
         }
+        normal.subtractRotation(tform);
     }
     
     public void add(Vector u) {
