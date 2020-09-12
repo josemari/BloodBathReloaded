@@ -1,18 +1,15 @@
 package org.jomaveger.tge.graphics;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.DisplayMode;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Window;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
+
 import javax.swing.JFrame;
 
-import org.jomaveger.tge.input.KeyInputManager;
-import org.jomaveger.tge.input.MouseInputManager;
 import org.jomaveger.tge.util.exception.ExceptionUtils;
 import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
@@ -34,10 +31,6 @@ public class ScreenManager implements IDisposable {
 
     private JFrame frame;
     
-    private KeyInputManager keyInputManager;
-
-	private MouseInputManager mouseInputManager;
-
     public ScreenManager(String windowTitle, int width, int height) {
         this.title = windowTitle;
         this.width = width;
@@ -161,15 +154,6 @@ public class ScreenManager implements IDisposable {
     public void setWindowTitle(String title) {
         frame.setTitle(title);
     }
-    
-    public void setCursor(Cursor cursor) {
-        frame.setCursor(cursor);
-    }
-
-    public void addKeyInputManager(KeyInputManager keyInputManager) {
-    	this.keyInputManager = keyInputManager;
-        frame.addKeyListener(keyInputManager);
-    }
 
     @Override
     public void dispose() {
@@ -180,25 +164,14 @@ public class ScreenManager implements IDisposable {
         }
         frame = null;
     }
-
-	public boolean windowShouldClose() {
-		return this.keyInputManager.keyDown(KeyEvent.VK_ESCAPE);
-	}
-
-	public void addMouseInputManager(MouseInputManager mouseInputManager) {
-		this.mouseInputManager = mouseInputManager;
-		frame.addMouseListener(mouseInputManager);
-		frame.addMouseMotionListener(mouseInputManager);
-		frame.addMouseWheelListener(mouseInputManager);
-	}
-	
-	public JFrame getWindowComponent() {
-		return frame;
-	}
-	
-	public Window getFullScreenWindow() {
-        return screen.getFullScreenWindow();
+    
+    public JFrame getWindowComponent() {
+    	return frame;
     }
+
+	public Window getFullScreenWindow() {
+		return screen.getFullScreenWindow();
+	}
 	
 	public void restoreScreen() {
         Window window = screen.getFullScreenWindow();

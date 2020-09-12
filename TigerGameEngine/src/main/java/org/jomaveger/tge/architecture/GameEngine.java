@@ -1,83 +1,70 @@
 package org.jomaveger.tge.architecture;
 
+import java.awt.Graphics2D;
+
 import org.jomaveger.tge.graphics.ScreenManager;
-import org.jomaveger.tge.input.KeyInputManager;
-import org.jomaveger.tge.input.MouseInputManager;
+import org.jomaveger.tge.input.InputManager;
 import org.jomaveger.tge.time.Timer;
 import org.jomaveger.tge.util.exception.ExceptionUtils;
+import org.jomaveger.tge.util.lang.IDisposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class GameEngine implements IGameEngine {
+public abstract class GameEngine implements Runnable, IDisposable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(GameEngine.class);
+    protected static final Logger LOG = LoggerFactory.getLogger(GameEngine.class);
 
     public static final int TARGET_FPS = 75;
     public static final int TARGET_UPS = 30;
 
-    private final ScreenManager window;
+    protected final ScreenManager window;
     private final Timer timer;
-    private final KeyInputManager keyInputManager;
-    private final MouseInputManager mouseInputManager;
-    private final IGameLogic gameLogic;
     private final Thread gameLoopThread;
+    
+    protected InputManager inputManager;
+    
+    private boolean isRunning;
 
-    private String windowTitle;
-
-    public GameEngine(String windowTitle, int width, int height, IGameLogic gameLogic) {
-        this.windowTitle = windowTitle;
+    public GameEngine(String windowTitle, int width, int height) {
         this.window = new ScreenManager(windowTitle, width, height);
+        this.window.init();
+        if(this.window.getFullScreenWindow() != null) {
+        	this.inputManager = new InputManager(this.window.getFullScreenWindow());	
+        } else {
+        	this.inputManager = new InputManager(this.window.getWindowComponent());
+        }
         this.timer = new Timer();
-        this.keyInputManager = new KeyInputManager(this.window);
-        this.mouseInputManager = new MouseInputManager(this.window);
-        this.gameLogic = gameLogic;
         this.gameLoopThread = new Thread(this);
     }
     
-    public GameEngine(String windowTitle, IGameLogic gameLogic) {
-        this.windowTitle = null;
+    public GameEngine(String windowTitle) {
         this.window = new ScreenManager(windowTitle);
+        this.window.init();
+        if(this.window.getFullScreenWindow() != null) {
+        	this.inputManager = new InputManager(this.window.getFullScreenWindow());	
+        } else {
+        	this.inputManager = new InputManager(this.window.getWindowComponent());
+        }
         this.timer = new Timer();
-        this.keyInputManager = new KeyInputManager(this.window);
-        this.mouseInputManager = new MouseInputManager(this.window);
-        this.gameLogic = gameLogic;
         this.gameLoopThread = new Thread(this);
     }
 
-    @Override
-    public IGameLogic getGameLogic() {
-        return this.gameLogic;
-    }
-
-    @Override
     public ScreenManager getWindow() {
         return this.window;
     }
-
-    @Override
-    public KeyInputManager getKeyInputManager() {
-        return this.keyInputManager;
-    }
-
-    @Override
-    public MouseInputManager getMouseInputManager() {
-        return this.mouseInputManager;
-    }
-
-    @Override
-    public void setWindowTitle(String title) {
-        this.windowTitle = title;
-
-        if (this.window != null) {
-            this.window.setWindowTitle(this.windowTitle);
-        }
-    }
     
-    @Override
+	public InputManager getInputManager() {
+		return this.inputManager;
+	}
+    
     public void start() {
         this.gameLoopThread.start();
     }
     
+    public void stop() {
+    	this.isRunning = false;
+    }
+
     @Override
     public void run() {
         try {
@@ -86,29 +73,33 @@ public final class GameEngine implements IGameEngine {
             this.dispose();
         } catch (Throwable ex) {
             LOG.error(ExceptionUtils.getExpandedMessage(ex));
+        } finally {
+        	if (this.window != null) {
+                this.window.restoreScreen();
+            }
+        	LOG.info("Tiger engine has stopped.");
+        	System.exit(0);
         }
     }
-
+    
     private void init() {
         LOG.info("Initializing Tiger Engine ...");
 
-        this.window.init();
+        this.isRunning = true;
         this.timer.init();
-        this.keyInputManager.init();
-        this.mouseInputManager.init();
-        this.gameLogic.init(this.window);
+        initialize();
         
         LOG.info("Tiger engine initialized successfully!");
     }
+    
+    protected abstract void initialize();
 
-    @Override
     public void gameLoop() {
         float elapsedTime;
         float accumulator = 0f;
         float interval = 1f / TARGET_UPS;
-
-        boolean running = true;
-        while (running && !this.window.windowShouldClose()) {
+        
+        while (isRunning) {
 
             elapsedTime = this.timer.getElapsedTime();
             accumulator += elapsedTime;
@@ -121,45 +112,28 @@ public final class GameEngine implements IGameEngine {
             }
 
             this.render();
-
-            sync();
         }
     }
 
-    private void input() {
-    	this.keyInputManager.poll();
-        this.mouseInputManager.poll();
-        this.gameLogic.input(this.window, this.keyInputManager, this.mouseInputManager);
-    }
-
+    protected abstract void input();
+    
     private void render() {
-        this.gameLogic.render(this.window);
+    	Graphics2D g = this.window.getGraphics();
+        render(g);
+        g.dispose();
         this.window.update();
     }
+    
+    protected abstract void render(Graphics2D g);
 
-    private void sync() {
-        float loopSlot = 1f / TARGET_FPS;
-        double endTime = timer.getLastLoopTime() + loopSlot;
-        while (timer.getTime() < endTime) {
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException ie) {
-            }
-        }
-    }
-
-    private void update(float interval) {
-        this.gameLogic.update(interval, this.keyInputManager, this.mouseInputManager, this.window);
-    }
+    protected abstract void update(float interval);
+    
 
     @Override
     public void dispose() {
-        this.gameLogic.dispose();
+    	close();
         this.window.dispose();
-        this.keyInputManager.dispose();
-        this.mouseInputManager.dispose();
-
-        LOG.info("Tiger engine has stopped.");
-        System.exit(0);
     }
+    
+    protected abstract void close();
 }

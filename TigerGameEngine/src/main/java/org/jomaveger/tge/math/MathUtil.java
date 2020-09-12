@@ -16,6 +16,10 @@ public interface MathUtil {
     	return Math.abs(value);
     }
     
+    public static int abs(int value) {
+    	return Math.abs(value);
+    }
+    
     public static float sqrt(float value) {
         return (float) Math.sqrt(value);
     }
@@ -57,6 +61,14 @@ public interface MathUtil {
     }
 
     public static int min(int a, int b) {
+        return Math.min(a, b);
+    }
+    
+    public static float max(float a, float b) {
+        return Math.max(a, b);
+    }
+
+    public static float min(float a, float b) {
         return Math.min(a, b);
     }
     

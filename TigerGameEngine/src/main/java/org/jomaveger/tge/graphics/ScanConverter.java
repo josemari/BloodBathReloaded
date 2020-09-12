@@ -5,7 +5,7 @@ import org.jomaveger.tge.math.Polygon;
 import org.jomaveger.tge.math.Vector;
 
 public class ScanConverter {
-
+	
     protected ViewWindow view;
     protected Scan[] scans;
     protected int top;
@@ -133,7 +133,7 @@ public class ScanConverter {
                     int x = MathUtil.ceil(v1.x + (y - v1.y) * gradient);
                     x = MathUtil.min(maxX+1, MathUtil.max(x, minX));
                     scans[y].setBoundary(x);
-                }
+                }                
             }
         }
 

@@ -2,37 +2,45 @@ package org.jomaveger.tge.main.chapter1;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
-import org.jomaveger.tge.architecture.IGameLogic;
-import org.jomaveger.tge.graphics.ScreenManager;
-import org.jomaveger.tge.input.KeyInputManager;
-import org.jomaveger.tge.input.MouseInputManager;
+import org.jomaveger.tge.architecture.GameEngine;
+import org.jomaveger.tge.input.GameAction;
 
-public class Chapter1Example1 implements IGameLogic {
+public class Chapter1Example1 extends GameEngine {
 
-	@Override
-	public void dispose() {
+	private GameAction exit = new GameAction("exit");
+	
+	public Chapter1Example1(String windowTitle, int width, int height) {
+		super(windowTitle, width, height);
 	}
 
 	@Override
-	public void init(ScreenManager window) {
+	protected void initialize() {
+		inputManager.mapToKey(exit, KeyEvent.VK_ESCAPE);
 	}
 
 	@Override
-	public void input(ScreenManager window, KeyInputManager keyInput, MouseInputManager mouseInput) {
+	protected void input() {
 	}
 
 	@Override
-	public void update(float interval, KeyInputManager keyInput, MouseInputManager mouseInput, ScreenManager window) {
-	}
-
-	@Override
-	public void render(ScreenManager window) {
-		Graphics2D g = window.getGraphics();
+	protected void render(Graphics2D g) {
 		g.setBackground(Color.BLACK);
 		g.clearRect(0, 0, window.getWidth(), window.getHeight());
 		g.setColor(Color.RED);
 		g.drawLine(window.getWidth() / 2, window.getHeight() / 2, window.getWidth() / 2, window.getHeight() / 2);
-		g.dispose();
+	}
+
+	@Override
+	protected void update(float interval) {
+		if (exit.isPressed()) {
+            stop();
+            return;
+        }
+	}
+
+	@Override
+	protected void close() {
 	}
 }

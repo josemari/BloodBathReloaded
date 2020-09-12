@@ -145,4 +145,52 @@ public class Polygon {
             v.minus(u);
         }
      }
+     
+     public boolean clip(float clipZ) {
+         boolean isCompletelyHidden = true;
+
+         for (int i=0; i<numVertices; i++) {
+             int next = (i + 1) % numVertices;
+             Vector v1 = this.vertexList.get(i);
+             Vector v2 = this.vertexList.get(next);
+             if (v1.z < clipZ) {
+                 isCompletelyHidden = false;
+             }
+             
+             if (v1.z > v2.z) {
+                 Vector temp = v1;
+                 v1 = v2;
+                 v2 = temp;
+             }
+             if (v1.z < clipZ && v2.z > clipZ) {
+                 float scale = (clipZ-v1.z) / (v2.z - v1.z);
+                 insertVertex(next,
+                     v1.x + scale * (v2.x - v1.x) ,
+                     v1.y + scale * (v2.y - v1.y),
+                     clipZ);
+                 i++;
+             }
+         }
+
+         if (isCompletelyHidden) {
+             return false;
+         }
+
+         for (int i=numVertices-1; i>=0; i--) {
+             if (this.vertexList.get(i).z > clipZ) {
+                 deleteVertex(i);
+             }
+         }
+
+         return (numVertices >= 3);
+     }
+     
+	public void insertVertex(int index, float x, float y, float z) {
+		this.insertVertex(index, new Vector(x, y, z));
+	}
+
+	public void deleteVertex(int index) {
+		this.vertexList.remove(index);
+		numVertices--;
+	}
 }
