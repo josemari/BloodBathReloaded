@@ -158,7 +158,7 @@ public class Chapter2Example2 extends GameEngine {
         // make the view window the entire screen
         viewWindow = new ViewWindow(0, 0,
             window.getWidth(), window.getHeight(),
-            (float)MathUtil.toRadians(75));
+            MathUtil.toRadians(75));
 
         Transform camera = new Transform(0, 100, 0);
         polygonRenderer = new SolidPolygonRenderer(camera, viewWindow);

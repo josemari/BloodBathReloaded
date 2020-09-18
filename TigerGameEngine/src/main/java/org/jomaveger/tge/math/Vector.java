@@ -1,6 +1,6 @@
 package org.jomaveger.tge.math;
 
-public final class Vector {
+public class Vector {
     
     public float x;
     public float y;
@@ -28,6 +28,12 @@ public final class Vector {
         this.x = vec.x;
         this.y = vec.y;
         this.z = vec.z;
+    }
+    
+    public void setTo(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
     @Override

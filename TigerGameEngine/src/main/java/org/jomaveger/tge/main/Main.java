@@ -4,6 +4,8 @@ import org.jomaveger.tge.architecture.GameEngine;
 import org.jomaveger.tge.main.chapter1.Chapter1Example1;
 import org.jomaveger.tge.main.chapter2.Chapter2Example1;
 import org.jomaveger.tge.main.chapter2.Chapter2Example2;
+import org.jomaveger.tge.main.chapter3.Chapter3Example1;
+import org.jomaveger.tge.main.chapter3.Chapter3Example2;
 import org.jomaveger.tge.math.Quaternion;
 
 public class Main {
@@ -15,8 +17,14 @@ public class Main {
 //        GameEngine tigerCh2Ex1 = new Chapter2Example1("Tiger Game Engine");
 //        tigerCh2Ex1.start();
         
-        GameEngine tigerCh2Ex2 = new Chapter2Example2("Tiger Game Engine", 640, 480);
-        tigerCh2Ex2.start();
+//        GameEngine tigerCh2Ex2 = new Chapter2Example2("Tiger Game Engine", 640, 480);
+//        tigerCh2Ex2.start();
+        
+//        GameEngine tigerCh3Ex1 = new Chapter3Example1("Tiger Game Engine", 640, 480);
+//        tigerCh3Ex1.start();
+        
+        GameEngine tigerCh3Ex2 = new Chapter3Example2("Tiger Game Engine", 640, 480);
+        tigerCh3Ex2.start();
     	    	
 //    	Matrix mat = new Matrix();
 //    	mat.m11 = 0.0f;
@@ -82,6 +90,6 @@ public class Main {
 Vector{x=5.0, y=5.0, z=0.0}
     	 */
     	
-    	Quaternion.slerp(new Quaternion(0, 1, 2, 3), new Quaternion(0, -4, -5, -6), 0.3f);
+//    	Quaternion.slerp(new Quaternion(0, 1, 2, 3), new Quaternion(0, -4, -5, -6), 0.3f);
     }
 }
