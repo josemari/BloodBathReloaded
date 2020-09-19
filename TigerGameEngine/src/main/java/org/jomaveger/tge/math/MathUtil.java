@@ -93,6 +93,10 @@ public interface MathUtil {
         }
     }
     
+    public static int ceil(double d) {
+    	return (int) Math.ceil(d);
+    }
+    
     public static boolean isPowerOfTwo(int n) {
         return ((n & (n-1)) == 0);
     }

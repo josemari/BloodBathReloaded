@@ -6,6 +6,7 @@ import org.jomaveger.tge.main.chapter2.Chapter2Example1;
 import org.jomaveger.tge.main.chapter2.Chapter2Example2;
 import org.jomaveger.tge.main.chapter3.Chapter3Example1;
 import org.jomaveger.tge.main.chapter3.Chapter3Example2;
+import org.jomaveger.tge.main.chapter3.Chapter3Example3;
 import org.jomaveger.tge.math.Quaternion;
 
 public class Main {
@@ -23,8 +24,11 @@ public class Main {
 //        GameEngine tigerCh3Ex1 = new Chapter3Example1("Tiger Game Engine", 640, 480);
 //        tigerCh3Ex1.start();
         
-        GameEngine tigerCh3Ex2 = new Chapter3Example2("Tiger Game Engine", 640, 480);
-        tigerCh3Ex2.start();
+//        GameEngine tigerCh3Ex2 = new Chapter3Example2("Tiger Game Engine", 640, 480);
+//        tigerCh3Ex2.start();
+        
+        GameEngine tigerCh3Ex3 = new Chapter3Example3("Tiger Game Engine", 640, 480);
+        tigerCh3Ex3.start();
     	    	
 //    	Matrix mat = new Matrix();
 //    	mat.m11 = 0.0f;

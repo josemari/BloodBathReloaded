@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.jomaveger.tge.graphics.texture.PowerOf2Texture;
 import org.jomaveger.tge.graphics.texture.ScanRenderer;
+import org.jomaveger.tge.graphics.texture.ShadedSurface;
 import org.jomaveger.tge.graphics.texture.ShadedTexture;
 import org.jomaveger.tge.graphics.texture.Texture;
 import org.jomaveger.tge.math.Rectangle;
@@ -42,6 +43,7 @@ public class TexturedPolygonRenderer extends PolygonRenderer {
         scanRenderers = new HashMap<>();
         scanRenderers.put(PowerOf2Texture.class, new PowerOf2TextureRenderer());
         scanRenderers.put(ShadedTexture.class, new ShadedTextureRenderer());
+        scanRenderers.put(ShadedSurface.class, new ShadedSurfaceRenderer());
     }
 	
 	public void startFrame(Graphics2D g) {
@@ -140,4 +142,26 @@ public class TexturedPolygonRenderer extends PolygonRenderer {
 	        }
 		}
 	}
+	
+	class ShadedSurfaceRenderer extends ScanRenderer {
+
+		@Override
+		public void render(int offset, int left, int right) {
+			ShadedSurface texture = (ShadedSurface)currentTexture;
+			float u = a.dotProduct(viewPos);
+	        float v = b.dotProduct(viewPos);
+	        float z = c.dotProduct(viewPos);
+	        float du = a.x;
+	        float dv = b.x;
+	        float dz = c.x;
+	        for (int x=left; x<=right; x++) {
+	            doubleBufferData[offset++] =
+	                texture.getColor((int)(u/z), (int)(v/z));
+	            u+=du;
+	            v+=dv;
+	            z+=dz;
+	        }
+		}
+	}
+
 }
